@@ -119,11 +119,32 @@ def index(request):
     if username:
         return HttpResponse('Front index, welcome {} !'.format((username)))
     else:
-        return redirect('/login/')
+        return redirect('/login/')          #重定向url，字符串格式的url地址
 ```
-## 3.2 If route urls changed
+## 3.2 If route urls changed, Nmae a url
 
-
+if modify url login -> signin, the urls.py and views.py redirect in the local app path should be changed both. For a easy way, give an url a name, and reverse a name to a real url.
+- urls.py
+    ```python
+    from django.urls import path
+    from . import views
+    urlpatterns = [
+        path('', views.index, name='index'),
+        path('signin/', views.login, name='login')
+    ]
+    ```
+- views.py
+    ```python
+    from django.http import HttpResponse
+    from django.shortcuts import redirect, reverse
+    
+    def index(request):
+        username = request.GET.get('username')
+        if username:
+            return HttpResponse('Front index, welcome {} !'.format((username)))
+        else:
+            return redirect(reverse('login'))       # 现将名字为login路径反转为url，再重定向至该url  
+    ```
 
 
 
