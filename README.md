@@ -66,7 +66,7 @@ django-env     django_project
 - ```python manage.py runserver 0.0.0.0:7000```，监听所有ip访问7000端口
 - access http://192.168.0.4:7000/ 
 <p align="center">
-    <img src="https://i.loli.net/2019/06/07/5cf9f8f1c70f232273.jpeg" alt="Sample"  width="80" height="240">
+    <img src="https://i.loli.net/2019/06/07/5cf9f8f1c70f232273.jpeg" alt="Sample"  width="200" height="420">
 </p>
 
 
