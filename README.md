@@ -149,7 +149,7 @@ django-env     django_project
 - views
   ```python
   def author_details(request):                        # 无需传递参数变量
-    author_id = request.GET.get('id')                 # URL中通过 .../?id=123，来传递参数
+    author_id = request.GET.get('id')                 # URL中通过 .../?id=123，G，ET请求来传递参数
     text = 'The author id is : {}'.format(author_id)
     return HttpResponse(text)  
   ```
@@ -162,7 +162,7 @@ django-env     django_project
       path('admin/', admin.site.urls),
       path('', index),
       path('book/details/<book_id>/<cate_id>', views.book_details),
-      path('author/', views.author_details)         # 通过？查询字符串传递参数，不需要<>
+      path('author/', views.author_details)         # 通过？查询字符串传递参数，不需要<>来匹配
   ]
   ```
 - 访问URL：http://127.0.0.1:8000/author/?id=123
