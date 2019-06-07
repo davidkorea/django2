@@ -243,18 +243,18 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 
 > **若使用实例命名空间，必须要指定应用命名空间app_name**
 
-# 4. include()函数详解
+## 3.5 include()函数详解
 
 虽然这样用的不多，但是能看懂别人代码为什么这么些
 
-## 4.1 应用命名空间
+### 3.5.1 应用命名空间
 也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
 ```python
 urlpatterns = [
     path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子木块url，app_name ）
 ]
 ```
-## 4.1 直接将app目录下的url内容写在include（）函数内
+### 3.5.2 直接将app目录下的url内容写在include（）函数内
 ```python
 from book import views
 
@@ -263,3 +263,71 @@ path('book/', include([
     path('list/', views.book_list)
 ])),
 ```
+# 4. re_path 正则表达式匹配url
+
+- 创建一个新的app
+    ```sh
+    (django-env)  david@MBP  ~/PycharmProjects/first-project/demo_url  python manage.py startapp article
+    ```
+- global url
+    ```diff
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('front.urls')),
+        path('cms1/', include('cms.urls', namespace='cms1')),
+        path('cms2/', include('cms.urls', namespace='cms2')),
+    +   path('article/', include('article.urls'))
+    ```
+
+- app article views
+    ```python
+    from django.http import HttpResponse
+
+    def article(request):
+        return HttpResponse('article index')
+
+    def article_list(request):
+        return HttpResponse('article list page')
+
+    def article_year_month(request, year, month):
+        text = 'The year is: {}, the month is: {}'.format(year, month)
+        return HttpResponse(text)
+    ```
+- app article urls
+    ```python
+    from django.urls import re_path
+    from . import views
+    
+    urlpatterns = [
+        re_path(r"^$", views.article),
+        re_path(r"^list/$", views.article_list),
+        re_path(r"^list/(?P<year>\d{4})/(?P<month>\d{2})/$", views.article_year_month)
+    ]
+    ```
+    - `r""`, raw text, 用户正则表达式
+    - `^`开始， `$`结尾
+    - `re_path(r"^$", views.article)`, 开始和结尾之前为空，匹配到article函数
+    - `re_path(r"^list/$", views.article_list)`，开始和结尾之前只包含‘list/’，匹配article_list
+    - `(?P<paras>)`，用于正则表达式中的变量
+    - `(?P<year>\d{4})`，变量year，四位正数，`(?P<month>\d{2})`，变量montj，两位整数
+    - `r"^list/(?P<year>\d{4})/(?P<month>\d{2})/$"`，匹配list/oooo/oo 的网址，o为整数
+
+![](https://i.loli.net/2019/06/07/5cfa81a7b1e8649572.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
