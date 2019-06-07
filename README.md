@@ -50,7 +50,19 @@ django-env
 django-env     django_project
 (django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project 
 ```
+## 3. run webserver
+#### 3.1 local access
 - ```cd django_project```
 - ```python manage.py runserver [port9000]```, port default=8000,也可以手动指定
 
+#### 3.2 same subnet access
+
+- edit settings.py
+```diff
+/Users/david/PycharmProjects/first-project/django_project/django_project/settings.py
+- 28 ALLOWED_HOSTS = []
++ 28 ALLOWED_HOSTS = ['192.168.0.4']
+```
+- ```python manage.py runserver 0.0.0.0:7000```，监听所有ip访问7000端口
+- access http://192.168.0.4:7000/ 
 
