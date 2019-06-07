@@ -140,6 +140,25 @@ django-env     django_project
   ```
   ![](https://i.loli.net/2019/06/07/5cfa1119bc18078436.png)
 
+- 限制传参的数据类型，字符转换器，如果不满足条件，则无法路由匹配
+  ```python
+  path('book/details/<book_id>/<int:cate_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
+  ```
+  - str：除了斜杠‘/’以外所有的字符
+  - int：一个或多个数字
+  - path：所有字符
+  - uuid：只有满足`uuid.uuid4()`python自带函数的返回值
+    ```python
+    >>> import uuid
+    >>> uuid.uuid4()
+    UUID('1bbb6818-ec33-43aa-b9c1-487edf8b6d3c')
+    ```
+  - slug：英文中横线，下划线，大小字母，小写字母
+
+
+
+
+
 ## 5.2 URL传递参数2：查询字符串？，GET请求
 
 此方法，视图函数无需写传递参数的变量。使用`request.GET.get('paras in url with ?')`
