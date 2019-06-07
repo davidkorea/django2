@@ -69,6 +69,8 @@ def login(request):
   ]
   ```
 ### 3. glocal urls.py
+import include 来调用app本地的url路由
+
 ```python
 from django.urls import path, include
 
@@ -104,6 +106,33 @@ def login(request):
   ]
 ### 3. glocal urls.py
 all have been done above
+
+# 3. Advanced Functions
+##  3.1 If no username passed， redirect to login page
+使用GET请求来传递参数的方式进行
+```python
+from django.http import HttpResponse
+from django.shortcuts import redirect
+
+def index(request):
+    username = request.GET.get('username')
+    if username:
+        return HttpResponse('Front index, welcome {} !'.format((username)))
+    else:
+        return redirect('/login/')
+```
+## 3.2 If route urls changed
+
+
+
+
+
+
+
+
+
+
+
 
 
 
