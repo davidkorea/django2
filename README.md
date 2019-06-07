@@ -69,7 +69,7 @@ django-env     django_project
     <img src="https://i.loli.net/2019/06/07/5cf9f8f1c70f232273.jpeg" alt="Sample"  width="200" height="420">
 </p>
 
-## 4, start app
+# 4, start app
     
 ```
 (django-env)  david@MBP  ~/PycharmProjects/first-project/django_project  python manage.py startapp book
@@ -100,9 +100,9 @@ django-env     django_project
 │   └── wsgi.py
 └── manage.py
 ```
-#### 4.1 view
+# 5. view, URL pass params
 每个app的视图函数 view.py中的函数，第一个参数必须是request，绝对不能少，返回值必须是HttpresponseBase子类。
-
+## 5.1 URL传递参数1，可传递多个参数
 - ```python manage.py startapp book```， 创建一个app
 - book/views.py
   ```
@@ -134,8 +134,19 @@ django-env     django_project
       path('', index),                  # 添加这一行来路由首页面
       path('book/details/<book_id>/<cate_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
   ]
-
   ```
+## 5.2 URL传递参数2：查询字符串
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
