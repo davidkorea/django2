@@ -109,7 +109,7 @@ django-env     django_project
 
   # Create your views here.
   def book(request):
-      return HttpResponse("book list")
+      return HttpResponse("book list") # 返回必须是一个Httprespose对象，否则报错
   ```
 - django_project/urls.py
   ```
@@ -120,3 +120,9 @@ django-env     django_project
       path('book/', views.book),
   ]
   ```
+  
+  
+  
+  
+  
+  
