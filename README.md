@@ -138,13 +138,11 @@ django-env     django_project
       path('book/details/<book_id>/<cate_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
   ]
   ```
-![](https://i.loli.net/2019/06/07/5cfa1119bc18078436.png)
+  ![](https://i.loli.net/2019/06/07/5cfa1119bc18078436.png)
 
 ## 5.2 URL传递参数2：查询字符串？，GET请求
 
-此方法，视图函数无需写传递参数的变量
-  
-  
+此方法，视图函数无需写传递参数的变量。使用`request.GET.get('paras in url with ?')`
   
 - views
   ```python
@@ -166,7 +164,7 @@ django-env     django_project
   ]
   ```
 - 访问URL：http://127.0.0.1:8000/author/?id=123
-  
+  ![](https://i.loli.net/2019/06/07/5cfa180f0aec016071.png)
   
   
   
