@@ -130,7 +130,7 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
     from . import views
     urlpatterns = [
         path('', views.index, name='index'),
-        path('signin/', views.login, name='login')
+        path('signin/', views.login, name='login')  # url改名为signin，但是该url的名字为login
     ]
     ```
 - views.py
@@ -146,10 +146,46 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
             return redirect(reverse('login'))       # 现将名字为login路径反转为url，再重定向至该url  
     ```
 
+## 3.3 应用命名空间
 
+因为前端和后台都有index和login两个页面。如果各自的url都取名为name=index和name=login，那么`redirect(reverse('login'))`时，django会一脸懵逼，不能正确路由。使用app_name, `redirect(reverse('app_name:login'))`来重定向。
 
+- front urls.py
+    ```python
+    from django.urls import path
+    from . import views
 
+    app_name = 'front'
 
+    urlpatterns = [
+        path('', views.index, name='index'),
+        path('signin/', views.login, name='login')
+    ]
+    ```
+- cmd urls.py
+    ```python
+    from django.urls import path
+    from . import views
+
+    app_name = 'cms'
+
+    urlpatterns = [
+        path('', views.index, name='index'),
+        path('login/', views.login, name='login')
+    ]
+    ```
+- front view redirect
+    ```python
+    from django.http import HttpResponse
+    from django.shortcuts import redirect, reverse
+    
+    def index(request):
+        username = request.GET.get('username')
+        if username:
+            return HttpResponse('Front index, welcome {} !'.format((username)))
+        else:
+            return redirect(reverse('front:login'))
+    ```
 
 
 
