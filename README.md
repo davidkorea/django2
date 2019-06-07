@@ -108,8 +108,8 @@ django-env     django_project
   from django.http import HttpResponse
 
   # Create your views here.
-  def book(request):
-      return HttpResponse("book list") # 返回必须是一个Httprespose对象，否则报错
+  def book(request):                    # request 必须要有，否则报错
+      return HttpResponse("book list")  # 返回必须是一个Httprespose对象或者其子类，否则报错
   ```
 - django_project/urls.py
   ```
