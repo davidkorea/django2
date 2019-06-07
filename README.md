@@ -101,8 +101,9 @@ django-env     django_project
 └── manage.py
 ```
 #### 4.1 view
-每个app的试图函数 view.py中的函数，第一个参数必须是request
-- ```python manage.py startapp book```
+每个app的视图函数 view.py中的函数，第一个参数必须是request，绝对不能少，返回值必须是HttpresponseBase子类。
+
+- ```python manage.py startapp book```， 创建一个app
 - book/views.py
   ```
   from django.http import HttpResponse
