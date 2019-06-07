@@ -101,4 +101,22 @@ django-env     django_project
 └── manage.py
 ```
 #### 4.1 view
-每个app的试图函数 view.py中的
+每个app的试图函数 view.py中的函数，第一个参数必须是request
+- ```python manage.py startapp book```
+- book/views.py
+  ```
+  from django.http import HttpResponse
+
+  # Create your views here.
+  def book(request):
+      return HttpResponse("book list")
+  ```
+- django_project/urls.py
+  ```
+  from book import views
+
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('book/', views.book),
+  ]
+  ```
