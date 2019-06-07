@@ -69,4 +69,34 @@ django-env     django_project
     <img src="https://i.loli.net/2019/06/07/5cf9f8f1c70f232273.jpeg" alt="Sample"  width="200" height="420">
 </p>
 
-
+## 4, start app
+    
+```
+(django-env)  david@MBP  ~/PycharmProjects/first-project/django_project  python manage.py startapp book
+(django-env)  david@MBP  ~/PycharmProjects/first-project/django_project  ls
+```
+```
+(django-env)  david@MBP  ~/PycharmProjects/first-project/django_project  tree
+.
+├── book
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── db.sqlite3
+├── django_project
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-37.pyc
+│   │   ├── settings.cpython-37.pyc
+│   │   ├── urls.cpython-37.pyc
+│   │   └── wsgi.cpython-37.pyc
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+```
