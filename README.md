@@ -108,8 +108,8 @@ django-env     django_project
   ```
   from django.http import HttpResponse
   
-  def book_details(request, book_id):             # request必须要有，否则报错，book_id用于路由时传递参数
-    text = 'The book id is : {}'.format(book_id)
+  def book_details(request, book_id, cate_id):    # request必须要有，否则报错，book_id用于路由时传递参数
+    text = 'The book id is: {}, the cate id is: {}'.format(book_id, cate_id)
     return HttpResponse(text)                     # 返回必须是一个Httprespose对象或者其子类，否则报错
   ```
 - django_project/urls.py
@@ -118,7 +118,7 @@ django-env     django_project
 
   urlpatterns = [
       path('admin/', admin.site.urls),
-      path('book/details/<book_id>', views.book_details)
+      path('book/details/<book_id>/<cate_id>', views.book_details)
   ]
   ```
   此时，由于配置了url，所以默认的开启页面消失，如不另行设置，则会报错。所以可以简单写一个，以免看到报错页面
@@ -132,7 +132,7 @@ django-env     django_project
   urlpatterns = [
       path('admin/', admin.site.urls),
       path('', index),                  # 添加这一行来路由首页面
-      path('book/details/<book_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
+      path('book/details/<book_id>/<cate_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
   ]
 
   ```
