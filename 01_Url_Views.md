@@ -264,6 +264,7 @@ path('book/', include([
 ])),
 ```
 # 4. re_path 正则表达式匹配url
+**特殊情况再用re_path，能用path就用path**
 
 - 创建一个新的app
     ```sh
