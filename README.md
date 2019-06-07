@@ -50,3 +50,7 @@ django-env
 django-env     django_project
 (django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project 
 ```
+- ```cd django_project```
+- ```python manage.py runserver [port9000]```, port default=8000,也可以手动指定
+
+
