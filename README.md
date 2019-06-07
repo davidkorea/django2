@@ -102,6 +102,9 @@ django-env     django_project
 ```
 # 5. view, URL pass params
 每个app的视图函数 view.py中的函数，第一个参数必须是request，绝对不能少，返回值必须是HttpresponseBase子类。
+
+这个request对象中包含来所有客户端传递过来的信息。
+
 ## 5.1 URL传递参数1，可传递多个参数
 - ```python manage.py startapp book```， 创建一个app
 - book/views.py
@@ -135,14 +138,34 @@ django-env     django_project
       path('book/details/<book_id>/<cate_id>', views.book_details), # 此处的<>，为函数中传递的参数变量，不能写错
   ]
   ```
-## 5.2 URL传递参数2：查询字符串
+![](https://i.loli.net/2019/06/07/5cfa1119bc18078436.png)
 
+## 5.2 URL传递参数2：查询字符串？，GET请求
+
+此方法，视图函数无需写传递参数的变量
   
   
   
-  
-  
-  
+- views
+  ```python
+  def author_details(request):                        # 无需传递参数变量
+    author_id = request.GET.get('id')                 # URL中通过 .../?id=123，来传递参数
+    text = 'The author id is : {}'.format(author_id)
+    return HttpResponse(text)  
+  ```
+
+- urls
+
+  ```python
+  ...
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('', index),
+      path('book/details/<book_id>/<cate_id>', views.book_details),
+      path('author/', views.author_details)         # 通过？查询字符串传递参数，不需要<>
+  ]
+  ```
+- 访问URL：http://127.0.0.1:8000/author/?id=123
   
   
   
