@@ -1,6 +1,8 @@
 # django2
+https://brew.sh/
 
-### 1. iterm2 + zsh
+
+## 1. iterm2 + zsh
 - [iTerm2 + Oh My Zsh 打造舒适终端体验](https://www.jianshu.com/p/9c3439cc3bdb)
 - [zsh 下Anaconda的安装](https://www.jianshu.com/p/74b1c60148e8)
   
@@ -11,8 +13,9 @@
 david@DaviddeMacBook-Pro  ~  pip --version
 pip 18.1 from /Users/david/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
 ```
-### 2. virtualenv
+## 2. python virtualenv
 
+#### 2.1 virtualenv
 ```
 david@DaviddeMacBook-Pro  ~  pip install virtualenv
 ```
@@ -30,3 +33,20 @@ david@DaviddeMacBook-Pro  ~  pip install virtualenv
 创建项目目录
 - ``` cd PycharmProjects```
 - ```mkdir first-project```
+
+#### 2.2 python -m venv
+所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面
+
+```
+ david@DaviddeMacBook-Pro  ~/PycharmProjects  mkdir first-project
+ david@DaviddeMacBook-Pro  ~/PycharmProjects  cd first-project
+ david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  python -m venv django-env
+ david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  source django-env/bin/activate
+(django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  pip install django
+(django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  ls
+django-env
+(django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  django-admin startproject django_project
+(django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project  ls
+django-env     django_project
+(django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project 
+```
