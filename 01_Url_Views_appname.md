@@ -235,7 +235,9 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
         if username:
             return HttpResponse('CMS index')
         else:
-            return redirect(reverse('cms:login'))
+    -       return redirect(reverse('cms:login'))
+    +       current_namespace = request.resolver_match.namespace        # 获取当前的namespace
+    +       return redirect(reverse('%s:login'%current_namespace))
     ```
 
 
