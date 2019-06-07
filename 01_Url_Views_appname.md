@@ -240,7 +240,7 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
     +       return redirect(reverse('%s:login'%current_namespace))
     ```
 
-
+**若使用实例命名空间，必须要指定应用命名空间app_name**
 
 
 
