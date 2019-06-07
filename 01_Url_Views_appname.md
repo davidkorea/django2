@@ -186,10 +186,57 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
         else:
             return redirect(reverse('front:login'))
     ```
+## 3.4 实例命名空间
 
+当同一个app有2个不同当url时，redirect会乱套，需要给每一个url指定一个名称。比如cms1和cms2两个url都定向于cms app，如果没有username，则重定向到cms/login页面
 
+- global url
+    ```python
+    from django.urls import path, include
 
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('front.urls')),
+        path('cms1/', include('cms.urls')),
+        path('cms2/', include('cms.urls'))
+    ```
+- cms view
+    ```python
+    from django.shortcuts import redirect,reverse
 
+    def index(request):
+        username = request.GET.get('username')
+        if username:
+            return HttpResponse('CMS index')
+        else:
+            return redirect(reverse('cms:login'))
+    ```
+    - 当输入 http://127.0.0.1:8000/cms1 时，可以重定向到http://127.0.0.1:8000/cms1/login/ 但是输入http://127.0.0.1:8000/cms2 也重定向到来http://127.0.0.1:8000/cms1/login/ 
+    - 因此需要准确路由，需要实例命名
+
+- global url
+    ```diff
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('front.urls')),
+    -   path('cms1/', include('cms.urls')),
+    -   path('cms2/', include('cms.urls'))
+    +   path('cms1/', include('cms.urls', namespace='cms1')),
+    +   path('cms2/', include('cms.urls', namespace='cms2'))
+    ```
+- cms view
+    ```diff
+    from django.shortcuts import redirect,reverse
+
+    def index(request):
+        username = request.GET.get('username')
+        if username:
+            return HttpResponse('CMS index')
+        else:
+            return redirect(reverse('cms:login'))
+    ```
 
 
 
