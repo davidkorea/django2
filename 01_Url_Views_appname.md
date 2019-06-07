@@ -187,12 +187,6 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
             return redirect(reverse('front:login'))
     ```
 
-也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
-```python
-urlpatterns = [
-    path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子木块url，app_name ）
-]
-```
 ## 3.4 实例命名空间
 
 当同一个app有2个不同当url时，redirect会乱套，需要给每一个url指定一个名称。比如cms1和cms2两个url都定向于cms app，如果没有username，则重定向到cms/login页面
@@ -249,5 +243,23 @@ urlpatterns = [
 
 > **若使用实例命名空间，必须要指定应用命名空间app_name**
 
+# 4. include()函数详解
 
+虽然这样用的不多，但是能看懂别人代码为什么这么些
 
+## 4.1 应用命名空间
+也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
+```python
+urlpatterns = [
+    path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子木块url，app_name ）
+]
+```
+## 4.1 直接将app目录下的url内容写在include（）函数内
+```python
+from book import views
+
+path('book/', include([
+    path('', views.book),
+    path('list/', views.book_list)
+])),
+```
