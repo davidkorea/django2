@@ -11,13 +11,22 @@
 david@DaviddeMacBook-Pro  ~  pip --version
 pip 18.1 from /Users/david/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
 ```
-### virtualenv
+### 2. virtualenv
 
 ```
 david@DaviddeMacBook-Pro  ~  pip install virtualenv
 ```
-- 虚拟环境，就是一个代码运行环境而已，文件系统和物理机mac一样。
+虚拟环境，就是一个代码运行环境而已，文件系统和物理机mac一样。
   - 虚拟环境单独创建一个文件目录做管理，所有python虚拟环境全部放到一个目录下
   - 而创建python项目时，需要单独存放到另外一个专门用户代码项目的目录
   - 即，虚拟环境放在：/Users/david/python-envs, 项目放在/Users/david/PycharmProjects
   
+
+创建虚拟环境
+- ```cd /Users/david/python-envs```
+- ```virtualenv django-env```
+- ```. django-env/bin/activate```
+
+创建项目目录
+- ``` cd PycharmProjects```
+- ```mkdir first-project```
