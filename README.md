@@ -100,3 +100,5 @@ django-env     django_project
 │   └── wsgi.py
 └── manage.py
 ```
+#### 4.1 view
+每个app的试图函数 view.py中的
