@@ -5,7 +5,7 @@
 - this is easy to maintance the app list when a new app is developed
 - the wxminiprogram show the app list by a grid weui
 
-# 1. wxminiprogram
+# 1. Front-end: wxminiprogram
 ## 1.1 import weui.wxss and icon,img resources
 - download https://github.com/Tencent/weui-wxss in the dist path
   - create a directory named as thirdparty, copy weui.wxss to this path
@@ -59,7 +59,26 @@
   - the `{{item.name}}` can get the value in the dict by its key in the grid list
   - **what we will do is that make this menu page can get the app list automatically from the django backend instead of the static fake grid list.**
 
+# 2. Back-end: django
+- create a ymal file to write the published app and developing app list
+- let django read this file and provide a HTTPresponse api for front-end request
+- when developed a new app, modify th9is yaml file and wxminiprogram can automatically get this app name in the menu page
+## 2.1 yaml
+- wxminiprogram should read published -> app -> name, similiar as read a json 
+  ```yaml
+  published:
+    - app:
+        category: life
+        application: weather
+        name: 天气
+        publish_date: 2019-06-08
+        url: /service/weather
+        desc: this is a weather app.
+    - app:
 
+  developing:
+    - app:
+  ```
 
 
 
