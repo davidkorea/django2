@@ -1,4 +1,4 @@
-# django request and response
+# Django request and response & RESTful API
 # 1. Create a django project and app named apis
 - create a django venv, pip install django, source activate
 - django-admin startproject wx_test_1 project
@@ -76,7 +76,7 @@ from django.http import HttpResponse, JsonResponse, FileResponse
   ```
 ![](https://i.loli.net/2019/06/08/5cfb479b470f666501.png)
   
-# 3. Weather api
+# 3. Weather api implement
 
 - third party api
   - signup https://www.juhe.cn/ , get appkey
@@ -142,6 +142,29 @@ http://127.0.0.1:8000/weather/?city=长沙
 ## 3.5 测试POST
 
 ![](https://i.loli.net/2019/06/08/5cfb64331814076453.png)
+
+
+# 4. RESTful API
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
