@@ -1,5 +1,5 @@
-# apis
-
+# django request and response
+# 1. Create a django project and app named apis
 - create a django venv, pip install django, source activate
 - django-admin startproject wx_test_1 project
 - manage.py startapp apis
@@ -50,9 +50,36 @@
 - runserver
   ![](https://i.loli.net/2019/06/08/5cfb448ac786349064.png)
   
-  
-  
-  
-  
+# 2. HttpResponse, JsonResponse, FileResponse
+```
+from django.http import HttpResponse, JsonResponse, FileResponse
+```
+- weather.py view
+  ```python
+  from django.http import HttpResponse, JsonResponse, FileResponse
+
+  def helloworld(request):
+      method = request.method
+      meta = request.META
+      cookies = request.COOKIES
+      paras = request.GET
+      # text = []
+      # for k, v in paras.items():
+      #     text.append((k,v))
+      # return HttpResponse(text)
+      return JsonResponse(paras)
+  ```
+  ```
+  from django.http import HttpResponse, JsonResponse, FileResponse
+
+  def helloworld(request):
+      data = {
+          "method": "GET",
+          "meta": "meta",
+          "cookies": "cookies"
+      }
+      return JsonResponse(data=data, safe=False, status=201)
+      # safe=False, 不检查是否为JSON格式，可以将python dict只是输出显示
+  ```
   
   
