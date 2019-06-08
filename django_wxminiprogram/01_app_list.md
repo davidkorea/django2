@@ -48,7 +48,8 @@
     grid: [{"name": "app1"}, {"name": "appe"}]
   }
   ```
-
+  - the `wx:for="{{grid}}"`, can iterate the number of the items in the variable `grid`
+  - the `{{item.name}}` can get the value in the dict by its key in the grid list
 
 
 
