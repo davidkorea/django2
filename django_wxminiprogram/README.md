@@ -81,5 +81,5 @@ from django.http import HttpResponse, JsonResponse, FileResponse
       return JsonResponse(data=data, safe=False, status=201)
       # safe=False, 不检查是否为JSON格式，可以将python dict只是输出显示
   ```
-  
+![](https://i.loli.net/2019/06/08/5cfb479b470f666501.png)
   
