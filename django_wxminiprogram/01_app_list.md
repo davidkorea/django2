@@ -52,7 +52,7 @@
 - this grid variabkle should be a list[] due to a list is iterable, and each item in this list should be a dict{}
   ```js
   data: {
-    grid: [{"name": "app1"}, {"name": "appe"}]
+    grid: [{"name": "app1"}, {"name": "app2"}, {"name": "app3"}]
   }
   ```
   - the `wx:for="{{grid}}"`, can iterate the number of the items in the variable `grid`
