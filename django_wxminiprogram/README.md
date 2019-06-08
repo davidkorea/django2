@@ -145,6 +145,10 @@ http://127.0.0.1:8000/weather/?city=长沙
 
 
 # 4. RESTful API
+- project settings -> `ROOT_URLCONF = 'wx_test_1.urls'`
+- wx_test_1.urls -> `urlpatterns = [ include('apis.urls')]`
+- apis.urls -> `urlpatterns = [weather.weather_app]`
+
 
 
 
