@@ -173,7 +173,9 @@ http://127.0.0.1:8000/weather/?city=长沙
       path('weather/', weather.weather_app),
   ]
   ```
-  
+- access api: http://127.0.0.1:8000/api/service/weather/?city=长沙
+
+  ![](https://i.loli.net/2019/06/08/5cfb6a5b56e4a51686.png)
 
 
 
