@@ -146,14 +146,14 @@ http://127.0.0.1:8000/weather/?city=长沙
 
 # 4. RESTful API
 1. project settings -> `ROOT_URLCONF = 'wx_test_1.urls'`
-2. wx_test_1.urls -> `urlpatterns = [ include('api_v1.urls')]`
-3. api_v1.urls -> `urlpatterns = [ include('apis.urls')]`
-4. apis.urls -> `urlpatterns = [weather.weather_app]`
+2. wx_test_1.urls -> `urlpatterns = ['api/v1/', include('api_v1.urls')]`
+3. api_v1.urls -> `urlpatterns = ['service/', include('apis.urls')]`
+4. apis.urls -> `urlpatterns = ['weather/', weather.weather_app]`
 
 - global urls
   ```diff
   - # path('weather/', include('apis.urls'))
-  + path('api/', include('wx_test_1.api_v1'))
+  + path('api/v1', include('wx_test_1.api_v1'))
   ```
 - create a py file named "api_v1" under global path, /Users/david/PycharmProjects/wx_test_1/wx_test_1/api_v1.py
   ```python
@@ -173,7 +173,7 @@ http://127.0.0.1:8000/weather/?city=长沙
       path('weather/', weather.weather_app),
   ]
   ```
-- access api: http://127.0.0.1:8000/api/service/weather/?city=长沙
+- access api: http://127.0.0.1:8000/api/v1/service/weather/?city=长沙
 
   ![](https://i.loli.net/2019/06/08/5cfb6a5b56e4a51686.png)
 
