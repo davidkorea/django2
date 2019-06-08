@@ -83,7 +83,7 @@
 
 ## 2.2 menu view
 - create a  function to read this yaml file and another function to warp a costomized Jsonresponse
-### 1. utils to wrap a  costomized Jsonresponse
+### 1. create utils to wrap a costomized Jsonresponse
 - create a PythonPackage named as utils and create a py file named as response.py
   ```python
   class ReturnCode:
@@ -123,9 +123,39 @@
       return response
   ```
 
-### 2. 
+### 2. create a menu view in the apis app
+/Users/david/PycharmProjects/wx_test_1/apis/views/weather.py
 ```python
+from django.http import JsonResponse
+import os
+import yaml
+from wx_test_1 import settings
+from utils import response
 
+def init_menu_data():
+    app_yaml_file = os.path.join(settings.BASE_DIR, 'app.yaml')
+    with open(app_yaml_file, 'r', encoding='utf-8') as f:
+        apps = yaml.load(f)
+        return apps
+        # 用于读取yaml文件，并未下个函数提供原始数据
+
+def get_menu(request):
+    all_app_data = init_menu_data()
+    published_app = all_app_data.get('published')
+    # 可以直接返回这个信息，就是上面函数的读取的yaml原始信息，但不太友好还需要再增加几个字段
+    wrap_response = response.wrap_json_response(data=published_app,
+                                                code=response.ReturnCode.SUCCESS,)
+    return JsonResponse(wrap_response, safe=False)
+```
+### 3. urls
+```python
+path('menu/', menu.get_menu)from .views import weather, menu
+
+urlpatterns = [
+    # path('', weather.weather_app),
+    path('weather/', weather.weather_app),
+    path('menu/', menu.get_menu)
+]
 ```
 
 
