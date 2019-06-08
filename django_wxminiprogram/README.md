@@ -145,12 +145,35 @@ http://127.0.0.1:8000/weather/?city=长沙
 
 
 # 4. RESTful API
-- project settings -> `ROOT_URLCONF = 'wx_test_1.urls'`
-- wx_test_1.urls -> `urlpatterns = [ include('apis.urls')]`
-- apis.urls -> `urlpatterns = [weather.weather_app]`
+1. project settings -> `ROOT_URLCONF = 'wx_test_1.urls'`
+2. wx_test_1.urls -> `urlpatterns = [ include('api_v1.urls')]`
+3. api_v1.urls -> `urlpatterns = [ include('apis.urls')]`
+4. apis.urls -> `urlpatterns = [weather.weather_app]`
 
+- global urls
+  ```diff
+  - # path('weather/', include('apis.urls'))
+  + path('api/', include('wx_test_1.api_v1'))
+  ```
+- create a py file named "api_v1" under global path, /Users/david/PycharmProjects/wx_test_1/wx_test_1/api_v1.py
+  ```python
+  from django.urls import path,include
 
+  urlpatterns = [
+      path('service/', include('apis.urls'))
+  ]
+  ```
+- apis app urls
+  ```python
+  from django.urls import path
+  from .views import weather
 
+  urlpatterns = [
+      # path('', weather.weather_app),
+      path('weather/', weather.weather_app),
+  ]
+  ```
+  
 
 
 
