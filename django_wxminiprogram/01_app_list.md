@@ -42,8 +42,11 @@
 ### 2. menu.js
 - because the Grid has many items, should define a variable in js file for iteration.
 - define variable in the `data` filed which has been created by default
+- this grid variabkle should be a list[] due to a list is iterable, and each item in this list should be a dict{}
   ```js
-  
+  data: {
+    grid: [{"name": "app1"}, {"name": "appe"}]
+  }
   ```
 
 
