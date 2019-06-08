@@ -59,15 +59,8 @@ from django.http import HttpResponse, JsonResponse, FileResponse
   from django.http import HttpResponse, JsonResponse, FileResponse
 
   def helloworld(request):
-      method = request.method
-      meta = request.META
-      cookies = request.COOKIES
       paras = request.GET
-      # text = []
-      # for k, v in paras.items():
-      #     text.append((k,v))
-      # return HttpResponse(text)
-      return JsonResponse(paras)
+      return JsonResponse(paras)  # 无需遍历字典，直接输出JSON
   ```
   ```
   from django.http import HttpResponse, JsonResponse, FileResponse
