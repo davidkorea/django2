@@ -14,8 +14,10 @@
       print(method)
       print(meta)
       print(cookies)
-      text = [method, meta, cookies]
-
+      paras = request.GET
+      text = []
+      for k, v in paras.items():
+          text.append((k,v))
       return HttpResponse(text)
   ```
 - create a urls.py under apis app path
