@@ -40,7 +40,11 @@
   </view>
   ```
 ### 2. menu.js
-- because 
+- because the Grid has many items, should define a variable in js file for iteration.
+- define variable in the `data` filed which has been created by default
+  ```js
+  
+  ```
 
 
 
