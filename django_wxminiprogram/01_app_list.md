@@ -147,7 +147,7 @@ def get_menu(request):
                                                 code=response.ReturnCode.SUCCESS,)
     return JsonResponse(wrap_response, safe=False)
 ```
-### 3. urls
+## 2.3 urls
 ```python
 path('menu/', menu.get_menu)from .views import weather, menu
 
@@ -157,8 +157,53 @@ urlpatterns = [
     path('menu/', menu.get_menu)
 ]
 ```
-### 4. test api ok
+## 2.4 test api ok
 http://127.0.0.1:8000/api/v1/service/menu/
 
 ![](https://i.loli.net/2019/06/09/5cfbe28ad79c131769.png)
+
+# 3. Front-end: wxminiprogram
+- register globalData in app.js including `serverUrl` and `apiVersion`
+- claim app = getApp() to get globalData
+- when onLoad() exec wx.request to django backend to acquire app menu list
+
+## 3.1 globalData in app.js
+```js
+globalData: {
+  userInfo: null,                       # 模版自带
+  serverUrl: 'http://127.0.0.1:8000/',  # 新增
+  apiVersion: 'api/v1/'                 # 新增
+}
+```
+## 3.2 menu.js
+```js
+const app = getApp()    # 通过温江最上端声明getApp()来获取globalData
+
+data: {                 # grid的静态数据
+  grids: [
+    { "name": "app1" },
+    { "name": "app2" },
+    { "name": "app3" }
+  ]
+},
+  
+onReady: function () {
+  this.updateMenuData()
+  // console.log(app.globalData)
+},
+
+updateMenuData: function() {
+  var that = this
+  wx.request({
+    url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/menu/',
+    success: function(res) {
+      var menuData = res.data.data    // res.data.data 第一个data是res的结果数据
+      that.setData({                  // 第二个data是django返回的Jsonresponse中的data，参考postman图
+        grids: menuData,              // 将静态数据改写成后端获得的动态数据
+      })
+    }
+  })
+},
+```
+
 
