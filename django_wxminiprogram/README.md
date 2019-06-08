@@ -47,7 +47,8 @@
   -   'django.middleware.csrf.CsrfViewMiddleware',
   +   # 'django.middleware.csrf.CsrfViewMiddleware',
   ```
-  
+- runserver
+  ![](https://i.loli.net/2019/06/08/5cfb448ac786349064.png)
   
   
   
