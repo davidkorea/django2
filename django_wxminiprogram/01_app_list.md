@@ -19,5 +19,32 @@
 - create a directory named as menu under pages 
 - create Page in the pages/menu dir
 ### 1. menu.wxml
-
+- copy the sample from weui manual
+- modify the image src, and the item name
+  ```html
+  <view class="page">
+      <view class="page__hd">
+          <view class="page__title">Grid</view>
+          <view class="page__desc">九宫格</view>
+      </view>
+      <view class="page__bd">
+          <view class="weui-grids">
+              <block wx:for="{{grids}}" wx:key="*this">
+                  <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+                      <image class="weui-grid__icon" src="../../resources/icons/cube.svg" />
+                      <view class="weui-grid__label">{{item.name}}</view>
+                  </navigator>
+              </block>
+          </view>
+      </view>
+  </view>
+  ```
 ### 2. menu.js
+- because 
+
+
+
+
+
+
+
