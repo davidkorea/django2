@@ -210,4 +210,5 @@ updateMenuData: function() {
 -  <view class="weui-grid__label">{{item.name}}</view>
 +  <view class="weui-grid__label">{{item.app.name}}</view>
 ```
-
+## 3.4 Static vs Dynamic
+![](https://i.loli.net/2019/06/09/5cfbe63ddb74093606.png)
