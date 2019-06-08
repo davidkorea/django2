@@ -175,7 +175,7 @@ http://127.0.0.1:8000/weather/?city=长沙
   ```
 - access api: http://127.0.0.1:8000/api/v1/service/weather/?city=长沙
 
-  ![](https://i.loli.net/2019/06/08/5cfb6a5b56e4a51686.png)
+  ![](https://i.loli.net/2019/06/08/5cfb6b4ba5d5d84970.png)
 
 
 
