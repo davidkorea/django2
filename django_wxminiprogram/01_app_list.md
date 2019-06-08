@@ -157,5 +157,8 @@ urlpatterns = [
     path('menu/', menu.get_menu)
 ]
 ```
+### 4. test api ok
+http://127.0.0.1:8000/api/v1/service/menu/
 
+![](https://i.loli.net/2019/06/09/5cfbe28ad79c131769.png)
 
