@@ -27,7 +27,7 @@
       path('', weather.helloworld),
   ]
   ```
-- global urls
+- global urls.py
   ```python
   from django.urls import path, include
   from django.http import HttpResponse
@@ -40,7 +40,11 @@
       path('weather/', include('apis.urls'))
   ]
   ```
-  
+- global settings.py, comment out csrf middleware
+  ```diff
+  -   'django.middleware.csrf.CsrfViewMiddleware',
+  +   # 'django.middleware.csrf.CsrfViewMiddleware',
+  ```
   
   
   
