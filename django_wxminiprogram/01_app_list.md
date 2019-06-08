@@ -18,4 +18,6 @@
 ## 1.2 create menu page
 - create a directory named as menu under pages 
 - create Page in the pages/menu dir
+### 1. menu.wxml
 
+### 2. menu.js
