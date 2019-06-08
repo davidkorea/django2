@@ -76,3 +76,79 @@ from django.http import HttpResponse, JsonResponse, FileResponse
   ```
 ![](https://i.loli.net/2019/06/08/5cfb479b470f666501.png)
   
+# 3. Weather api
+
+- third party api
+  - signup https://www.juhe.cn/ , get appkey
+- create a PythonPackage name thiredparty, create a py file for request weather to juhe api
+- create a function in the weather view, when django web get a paras named "city", then call third party api 
+
+## 3.1 juhe api 业务逻辑代码
+/Users/david/PycharmProjects/wx_test_1/thirdparty/juhe_api.py
+```python
+import requests
+
+def weather(city):
+    juhe_api = 'http://apis.juhe.cn/simpleWeather/query'
+    key = 'xxxxxxxxxxxxxxxxxxx'                           # get in juhe console
+    param= '?city={}&key={}'.format(city, key)
+    query_url = juhe_api + param                          # full request api
+    print(query_url)
+    request = requests.get(url=query_url)                 # request GET mothod to juhe api server
+    # json_data = json.loads(request.text)
+    json_data = request.json()
+    result = json_data.get('result')                      # 聚合 返回参数说明，架构会变
+    data = {}
+    data['city'] = result.get('city')
+    data['temperature'] = result.get('realtime').get('temperature')
+    data['wind_direction'] = result.get('realtime').get('direct')
+    data['wind_strength'] = result.get('realtime').get('power')
+    data['humidity'] = result.get('realtime').get('humidity')
+    return data
+
+weather('济南')
+```
+## 3.2 weather view
+```python
+def weather_app(request):
+    if request.method == 'GET':
+        city =request.GET.get('city')
+        juhe_response = juhe_api.weather(city)
+        return JsonResponse(data=juhe_response, status=200)
+    elif request.method == 'POST':
+        received_body = json.loads(request.body)    # POST的请求内容在body内
+        cities = received_body.get('cities')        # cities是一个列表，这个名称是自己定的，postman发送POST请求时用
+        response = []                               # 请求是一个list，返回也是list
+        for city in cities:
+            result = juhe_api.weather(city)
+            response.append(result)
+        return JsonResponse(data=response, safe=False, status=200)    # safe=False，因为这是list，不是json
+```
+## 3.3 weather app urls
+```python
+from django.urls import path
+from .views import weather
+
+urlpatterns = [
+    path('', weather.weather_app),
+]
+```
+## 3.4 测试GET
+
+http://127.0.0.1:8000/weather/?city=长沙
+
+![](https://i.loli.net/2019/06/08/5cfb642daf57739215.png)
+
+## 3.5 测试POST
+
+![](https://i.loli.net/2019/06/08/5cfb64331814076453.png)
+
+
+
+
+
+
+
+
+
+
