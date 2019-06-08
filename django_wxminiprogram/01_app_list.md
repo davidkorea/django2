@@ -18,6 +18,13 @@
 ## 1.2 create menu page
 - create a directory named as menu under pages 
 - create Page in the pages/menu dir
+- add the menu page to app.json `tabbar`
+  ```js
+  {
+  "pagePath": "pages/menu/menu",
+  "text": "menu"
+  }
+  ```
 ### 1. menu.wxml
 - copy the sample from weui manual
 - modify the image src, and the item name
@@ -50,6 +57,7 @@
   ```
   - the `wx:for="{{grid}}"`, can iterate the number of the items in the variable `grid`
   - the `{{item.name}}` can get the value in the dict by its key in the grid list
+  - **what we will do is that make this menu page can get the app list automatically from the django backend instead of the static fake grid list.**
 
 
 
