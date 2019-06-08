@@ -14,7 +14,7 @@
       print(method)
       print(meta)
       print(cookies)
-      paras = request.GET
+      paras = request.GET   # GET方法获得的是一个字典，需要遍历后展示出来
       text = []
       for k, v in paras.items():
           text.append((k,v))
