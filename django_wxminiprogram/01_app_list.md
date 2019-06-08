@@ -5,7 +5,7 @@
 - this is easy to maintance the app list when a new app is developed
 - the wxminiprogram show the app list by a grid weui
 
-# 1. Front-end: wxminiprogram
+# 1. Static wx page
 ## 1.1 import weui.wxss and icon,img resources
 - download https://github.com/Tencent/weui-wxss in the dist path
   - create a directory named as thirdparty, copy weui.wxss to this path
@@ -59,11 +59,12 @@
   - the `{{item.name}}` can get the value in the dict by its key in the grid list
   - **what we will do is that make this menu page can get the app list automatically from the django backend instead of the static fake grid list.**
 
+
 # 2. Back-end: django
 - create a ymal file to write the published app and developing app list
 - let django read this file and provide a HTTPresponse api for front-end request
 - when developed a new app, modify th9is yaml file and wxminiprogram can automatically get this app name in the menu page
-## 2.1 yaml
+## 2.1 yaml 
 - wxminiprogram should read published -> app -> name, similiar as read a json 
   ```yaml
   published:
@@ -80,6 +81,51 @@
     - app:
   ```
 
+## 2.2 menu view
+- create a  function to read this yaml file and another function to warp a costomized Jsonresponse
+### 1. utils to wrap a  costomized Jsonresponse
+- create a PythonPackage named as utils and create a py file named as response.py
+  ```python
+  class ReturnCode:
+      # 状态码
+      SUCCESS = 0
+      FAILED = -100
+      UNAUTHORIZED = -500
+      BROKEN_AUTHORIZED_DATA = -501
+      WRONG_PARAMS = -101
 
+      @classmethod
+      def message(cls, code):
+          # 根据状态码转换成说明文字
+          if code == cls.SUCCESS:
+              return 'success'
+          elif code == cls.FAILED:
+              return 'failed'
+          elif code == cls.UNAUTHORIZED:
+              return 'unauthorized'
+          elif code == cls.WRONG_PARAMS:
+              return 'wrong_params'
+          else:
+              return ''
+
+  def wrap_json_response(data=None, code=None, message=None):
+      # 将一个Jsonresponse，再包装上code和message两个信息
+      # return一个dict结构，再有safe=false读取将一个Jsonresponse
+      response = {}
+      if not code:
+          code = ReturnCode.SUCCESS
+      if not message:
+          message = ReturnCode.message(code)
+      if data:
+          response['data'] = data
+      response['code'] = code
+      response['message'] = message
+      return response
+  ```
+
+### 2. 
+```python
+
+```
 
 
