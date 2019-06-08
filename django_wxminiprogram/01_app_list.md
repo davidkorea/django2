@@ -9,6 +9,13 @@
 ## 1.1 import weui.wxss and icon,img resources
 - download https://github.com/Tencent/weui-wxss in the dist path
   - create a directory named as thirdparty, copy weui.wxss to this path
+  - inport weui.wxss at the top of the global css file app.wxss 
+    ```js
+    @import "thirdparty/weui.wxss";
+    ```
 - create a derictory named as resources, copy the images and icon files into this path
+
 ## 1.2 create menu page
-- create 
+- create a directory named as menu under pages 
+- create Page in the pages/menu dir
+
