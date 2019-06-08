@@ -205,5 +205,9 @@ updateMenuData: function() {
   })
 },
 ```
-
+## 3.3 menu.wxml
+```diff
+-  <view class="weui-grid__label">{{item.name}}</view>
++  <view class="weui-grid__label">{{item.app.name}}</view>
+```
 
