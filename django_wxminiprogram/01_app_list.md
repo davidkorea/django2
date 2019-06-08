@@ -208,7 +208,8 @@ updateMenuData: function() {
 ## 3.3 menu.wxml
 ```diff
 -  <view class="weui-grid__label">{{item.name}}</view>
-+  <view class="weui-grid__label">{{item.app.name}}</view>
++  <view class="weui-grid__label">{{item.app.name}}</view>  
+                                  # refer to the img postman shows app->name
 ```
 ## 3.4 Static vs Dynamic
 ![](https://i.loli.net/2019/06/09/5cfbe63ddb74093606.png)
