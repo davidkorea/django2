@@ -98,6 +98,12 @@
 - create data list: `needUploadFiles`, `downloadedBackupedFiles`.
 - the apis below which is started by `wx.` is the wx origin apis, these apis should be wrapped in a function to use.
 - `chooseImage` and `previewImage` function is copied from weui uploader js, other function is created manually.
+
+wx.apis
+- [wx.chooseImage(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.chooseImage.html)
+- [wx.previewImage(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewImage.html)
+- [UploadTask wx.uploadFile(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html), 将本地资源上传到服务器。客户端发起一个 HTTPS POST 请求
+
 ```js
 const app = getApp()
 
