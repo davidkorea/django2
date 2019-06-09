@@ -217,6 +217,15 @@ class ImageView(View, response.CommonResponseMixin):
 ## 3.2 wx frontend
 wx.apis
 - [RequestTask wx.request(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html)
+  - why `res.data` in `success: function(res){ console.log(res.data)}` can refer to the api manual. 
+  -   object.Success Callback - Object res
+
+    |property|type|description|version|
+    |-|-|-|-|
+    |data	|string/Object/Arraybuffer	|Data returned by developer server	||
+    |statusCode|	number|	HTTP status code returned by developer server||	
+    |header|	Object|	HTTP Response Header returned by the developer server|	1.2.0|
+
 
 ```js
 deleteFiles: function(){
