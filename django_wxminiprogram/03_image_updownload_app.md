@@ -191,3 +191,34 @@ downloadFiles: function(){
 ```
 - we use a static md5 name for test, in production env, should select specific image and download by its md5
 ![](https://i.loli.net/2019/06/09/5cfcd8624b35977902.png)
+
+# 3. DeleteFiles
+wx.apis does not provide a deleteFile api, we need to wx.request(method='DELETE') to delete the file which is satored in backend server.
+## 3.1 django backend
+```python
+class ImageView(View, response.CommonResponseMixin):
+    def get(self, request):
+        ...
+    def post(self,request):
+        ...
+        
+    def delete(self,request):
+        md5 = request.GET.get('md5') # 从请求的url中get出md5
+        file_name = md5 + '.jpg'
+        file_path = os.path.join(settings.IMAGE_PATH, file_name)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            message = 'remove success.'
+        else:
+            message = 'file %s not found.' % file_name
+        response_data = self.wrap_json_response(message=message)
+        return JsonResponse(data=response_data, safe=False)
+```
+## 3.2 wx frontend
+wx.apis
+- [RequestTask wx.request(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html)
+
+```js
+
+
+```
