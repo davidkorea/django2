@@ -9,7 +9,7 @@
   - weui uploader
     ![](https://i.loli.net/2019/06/09/5cfca0bb9601c71372.png)
 # 1. UploadFiles
-## 1.1 django
+## 1.1 django backend
 - image view POST method
   ```python
   import hashlib
@@ -43,3 +43,58 @@
                                                   message=message)
           return JsonResponse(data=response_data, safe=False)
   ```
+## 1.2 wx frontend
+- create a directory named as imgbackup
+- create Page named as imgbackup
+- copy and modify weui uploader wxml and js code, add buttons 
+### 1.2.1 wxml
+```html
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">上传图片</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{needUploadFiles}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="page__bd page__bd_spacing">
+          <button class="weui-btn" type="primary" bindtap='uploadFiles'>Upload</button>
+          <button class="weui-btn" type="primary" bindtap='downloadFiles'>Download</button>
+          <button class="weui-btn" type="warn" bindtap='deleteFiles'>Delete</button>
+        </view>
+
+        <!-- 已上传图片 -->
+        <view class="weui-cells">
+          <view class="text-center">已备份图片</view>
+          <view class="weui-cell" wx:for="{{downloadedBackupedFiles}}">
+            <image class="" src="{{item}}" mode="aspectFill" data-index="{{index}}" data-type="DownloadedView" bindlongtap="longTapConfirm" />
+          </view>
+        </view>
+        <view class='text-center' wx:if="{{downloadedBackupedFiles.length == 0}}">暂无</view>
+    </view>
+</view>
+```
+
+
+
+
+
+
