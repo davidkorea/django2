@@ -84,7 +84,7 @@ urlpatterns = [
         elif: if request.method == 'DELETE':        # 删除
             ...
     ```
-- class view
+- class view，类视图可以自动判断HTTP请求但方法，来地洞调用类中但方法
 
 
 
