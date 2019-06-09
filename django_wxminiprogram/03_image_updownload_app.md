@@ -171,7 +171,23 @@ Page({
 ## 2.1 imgbackup.js
 wx.apis
 - [DownloadTask wx.downloadFile(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html), 下载文件资源到本地。客户端直接发起一个 HTTPS GET 请求，返回文件的本地临时路径，单次下载允许的最大文件为 50MB。
+  - because of download is a GET request, therefore django `ImageView.get()` will handle this request
 ```js
-
-
+downloadFiles: function(){
+    var that = this
+    wx.downloadFile({
+      url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/image/' + 
+        '?md5=' + 'f45d562179d0e7f0990326e9de2b55cf',
+      success: function(res) {
+        var tempFile = res.tempFilePath
+        var newDownloadedBackupedFiles = that.data.downloadedBackupedFiles
+        newDownloadedBackupedFiles.push(tempFile)
+        that.setData({
+          downloadedBackupedFiles: newDownloadedBackupedFiles
+        })
+      }
+    })
+  },
 ```
+- we use a static md5 name for test, in production env, should select specific image and download by its md5
+![](https://i.loli.net/2019/06/09/5cfcd8624b35977902.png)
