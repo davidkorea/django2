@@ -156,7 +156,9 @@ Page({
 - `uploadFiles: function()` will first get the full file path that select by `chooseImage: function()`
 - POST request to django backend, by the file name 'test'
 - if success print log
+  - pic direction has been rotated?????n
 
+![](https://i.loli.net/2019/06/09/5cfcd005d3cbb26558.png)
 
 
 
