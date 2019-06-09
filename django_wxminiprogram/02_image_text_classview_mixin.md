@@ -1,4 +1,4 @@
-# wxapp向django请求图文信息, 类视图classview，mixin
+# wxapp向django请求图文信息, 类视图classview，Mixin
 
 - 文字信息，请求1次，即可获取所需信息
 - 图片信息，请求2次。第一次请求获得资源链接地址，第二期请求根据资源地址获得图片信息
@@ -118,11 +118,27 @@ urlpatterns = [
     - postman POST, PUT, DELETE all success
         ![](https://i.loli.net/2019/06/09/5cfc9a7f2b76399467.png)
 
+# 3. Python Mixin继承通用视图
 
+将utils.response.wrap函数，换成Mixin。/Users/david/PycharmProjects/wx_test_1/utils/response.py
+- 定义一个class CommonResponseMixin(object)
+- 直接将之前的wrap_json_response（）函数复制过来即可，作为一 @classmethod
 
-
-
-
+```python
+class CommonResponseMixin(object):
+    @classmethod
+    def wrap_json_response(cls, data=None, code=None, message=None):
+        response = {}
+        if not code:
+            code = ReturnCode.SUCCESS
+        if not message:
+            message = ReturnCode.message(code)
+        if data:
+            response['data'] = data
+        response['code'] = code
+        response['message'] = message
+        return response
+```
 
 
 
