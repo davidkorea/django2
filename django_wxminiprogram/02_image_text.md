@@ -32,7 +32,7 @@ def image(request):
             # return HttpResponse(content=data, content_type='image/jpg')
             return FileResponse(open(img_file, 'rb'), content_type='image/jpg')
 
-# return  a json which contains image file name and url.
+# return a json which contains image file name and url.
 def image_test(request):
     if request.method == 'GET':
         md5 = request.GET.get('md5')
@@ -46,6 +46,8 @@ def image_test(request):
             response_data['url'] = '/service/image/?md5=%s' % (md5)
             data = response.wrap_json_response(data=response_data)
             return JsonResponse(data=data, safe=False)
+            
+# 虽然图片2次请求有道理，但还是不明白为啥这样搞，业务逻辑不了解
 ```
 - 返回图片文件，推荐使用Fileresponse
   - `return HttpResponse(content=data, content_type='image/jpg')`
@@ -68,3 +70,12 @@ urlpatterns = [
     ![](https://i.loli.net/2019/06/09/5cfc93024712416737.png)
 - access image text: http://127.0.0.1:8000/api/v1/service/imagetext/?md5=11111
     ![](https://i.loli.net/2019/06/09/5cfc94063fa7285123.png)
+
+
+
+
+
+
+
+
+
