@@ -47,7 +47,7 @@
 - create a directory named as imgbackup
 - create Page named as imgbackup
 - copy and modify weui uploader wxml and js code, add buttons 
-### 1.2.1 wxml
+### 1.2.1 imgbackup.wxml
 ```html
 <view class="page">
     <view class="page__bd">
@@ -93,7 +93,69 @@
 </view>
 ```
 
+## 1.2.1 imgbackup.js
+- claim app=getApp() to use globalData
+- create data list: `needUploadFiles`, `downloadedBackupedFiles`.
+- the apis below which is started by `wx.` is the wx origin apis, these apis should be wrapped in a function to use.
+- `chooseImage` and `previewImage` function is copied from weui uploader js, other function is created manually.
+```js
+const app = getApp()
 
+Page({
+  // 页面的初始数据
+  data: {
+    needUploadFiles: [],
+    downloadedBackupedFiles: []
+  },
+
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        that.setData({
+          needUploadFiles: that.data.needUploadFiles.concat(res.tempFilePaths)
+        });
+      }
+    })
+  },
+
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
+  },
+
+  uploadFiles: function(){
+    for (var i = 0; i < this.data.needUploadFiles.length; i ++){
+      var filePath = this.data.needUploadFiles[i]   // 迭代待上传文件列表，每一个都执行上传操作
+      wx.uploadFile({
+        url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/image/',
+        filePath: filePath,
+        name: 'test',
+        success: function(res){
+          console.log(res)
+        }
+      })
+    }
+  },
+
+  downloadFiles: function(){
+
+  },
+
+  deleteFiles: function(){
+
+  },
+})
+```
+- when click upload button in imgbackup.wxml, the `bindtap='uploadFiles'` attribute will call the `uploadFiles: function()`
+- `uploadFiles: function()` will first get the full file path that select by `chooseImage: function()`
+- POST request to django backend, by the file name 'test'
+- if success print log
 
 
 
