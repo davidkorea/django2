@@ -141,6 +141,8 @@ class CommonResponseMixin(object):
 ```
 # 3.1 类视图 + Mixin, 减少对象之间的耦合
 ```diff
+  from utils import response
+
 - class ImageView(View):
 + class ImageView(View, response.CommonResponseMixin):
      def get(self, request):
