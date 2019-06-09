@@ -139,8 +139,35 @@ class CommonResponseMixin(object):
         response['message'] = message
         return response
 ```
+# 3.1 类视图 + Mixin, 减少对象之间的耦合
+```diff
+class ImageView(View, response.CommonResponseMixin):
+    def get(self, request):
+        md5 = request.GET.get('md5')
+        img_file = os.path.join(settings.IMAGE_PATH, md5 + '.jpg')
+        if not os.path.exists(img_file):
+            return Http404()
+        else:
+            data = open(img_file, 'rb').read()
+            # return HttpResponse(content=data, content_type='image/jpg')
+            return FileResponse(open(img_file, 'rb'), content_type='image/jpg')
+    def post(self,request):
+        message = 'post success.'
+-       response_data = response.wrap_json_response(message=message)
++       response_data = self.wrap_json_response(message=message)
+        return JsonResponse(data=response_data, safe=False)
+
+    def put(self, request):
+        message = 'put success.'
++       response_data = self.wrap_json_response(message=message)
+        return JsonResponse(data=response_data, safe=False)
 
 
+    def delete(self,request):
+        message = 'delete success.'
++       response_data = self.wrap_json_response(message=message)
+        return JsonResponse(data=response_data, safe=False)
+```
 
 
 
