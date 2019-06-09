@@ -219,6 +219,22 @@ wx.apis
 - [RequestTask wx.request(Object object)](https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html)
 
 ```js
-
-
+deleteFiles: function(){
+    wx.request({
+      url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/image/' +
+        '?md5=' + 'f45d562179d0e7f0990326e9de2b55cf', // same url as the download url
+      method: 'DELETE',
+      success: function(res){
+        console.log(res.data)
+        wx.showToast({
+          title: 'Delete success.',
+        })
+      }
+    })
 ```
+![](https://i.loli.net/2019/06/09/5cfcdd26e05e218156.png)
+
+
+
+
+
