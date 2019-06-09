@@ -85,6 +85,38 @@ urlpatterns = [
             ...
     ```
 - class view，类视图可以自动判断HTTP请求但方法，来地洞调用类中但方法
+    ```python
+    from django.views import View       # View cap letter
+    
+    class ImageView(View):
+        def get(self, request):
+            md5 = request.GET.get('md5')
+            img_file = os.path.join(settings.IMAGE_PATH, md5 + '.jpg')
+            if not os.path.exists(img_file):
+                return Http404()
+            else:
+                data = open(img_file, 'rb').read()
+                # return HttpResponse(content=data, content_type='image/jpg')
+                return FileResponse(open(img_file, 'rb'), content_type='image/jpg')
+                
+        def post(self,request):
+            message = 'post success.'
+            response_data = response.wrap_json_response(message=message)
+            return JsonResponse(data=response_data, safe=False)
+
+        def put(self, request):
+            message = 'put success.'
+            response_data = response.wrap_json_response(message=message)
+            return JsonResponse(data=response_data, safe=False)
+
+        def delete(self,request):
+            message = 'delete success.'
+            response_data = response.wrap_json_response(message=message)
+            return JsonResponse(data=response_data, safe=False)
+    ```
+    - access http://127.0.0.1:8000/api/v1/service/image/?md5=11111 success
+    - postman POST, PUT, DELETE all success
+        ![](https://i.loli.net/2019/06/09/5cfc9a7f2b76399467.png)
 
 
 
