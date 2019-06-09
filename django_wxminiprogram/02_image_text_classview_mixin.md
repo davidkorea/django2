@@ -71,6 +71,61 @@ urlpatterns = [
 - access image text: http://127.0.0.1:8000/api/v1/service/imagetext/?md5=11111
     ![](https://i.loli.net/2019/06/09/5cfc94063fa7285123.png)
 
+# 2. 类视图将HTTP请求方法逻辑分离
+- 目前但view函数，根据请求方法进行逻辑分离
+    ```pythin
+    def image(request):
+        if request.method == 'GET':                 # 查询
+            ...     
+        elif: if request.method == 'POST':          # 新增
+            ...        
+        elif: if request.method == 'PUT':           # 修改
+            ...
+        elif: if request.method == 'DELETE':        # 删除
+            ...
+    ```
+- class view
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
