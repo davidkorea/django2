@@ -160,3 +160,45 @@ add  attributes `bindtap="onNavigatorTap" data-index="{{index}}"` to <navigator>
     <view class="weui-grid__label">{{item.app.name}}</view>
 </navigator>
 ```
+## 3.2 menu.js
+```js
+const app = getApp()
+Page({
+      // 页面的初始数据
+      data: {
+            grids: [
+              { "name": "app1" },
+              { "name": "app2" },
+              { "name": "app3" }
+            ]
+      },
+
+      // 生命周期函数--监听页面初次渲染完成
+      onReady: function () {
+            this.updateMenuData()
+      },
+
+      updateMenuData: function() {
+            var that = this
+            wx.request({
+                  url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/menu/',
+                  success: function(res) {
+                        var menuData = res.data.data
+                        that.setData({
+                             grids: menuData,
+                        })
+                  }
+            })
+      },
+
+      onNavigatorTap: function(e){
+            var index = e.currentTarget.dataset.index   # 从前端页面拿到所点击图标的idx
+            var appItem = this.data.grids[index]        # 根据idx在grids数组中索引到相应的app
+            if (appItem.app.application == 'weather'){  # 锁定相应app后，其内容与django后台的yaml一样
+                  wx.navigateTo({
+                        url: '../weather/weather',      # 跳转到weather页面
+                  })
+            }
+      },
+})
+```
