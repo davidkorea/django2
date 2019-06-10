@@ -70,7 +70,36 @@ urlpatterns = [
     ]
 ```
     
-    
-    
+# 2. wx frontend
+- create a dir anmed weather under pages path and create Page named weather
+
+## 2.1 weather.wxml
+```html
+<!--pages/weather/weather.wxml-->
+<view class="weui-panel weui-panel_access">
+  <view wx:if='{{isAuthorized}}' class="weui-panel__hd">您关心的城市：</view>
+  <view wx:else class="weui-panel__hd">当前热门城市：</view>
+  <view class="weui-panel__bd">
+      
+    <navigator url="" wx:for='{{weatherData}}' wx:key="*this" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+      <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../resources/icons/weather/sunny.svg" />
+      </view>
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{item.city_info.province}} - {{item.city}}</view>
+          
+            <view class="weui-media-box__desc">
+                 <text>温度：{{item.temperature}}度 / 风况：{{item.wind_direction}} {{item.wind_strength}}</text>
+            </view>
+          
+            <view class="weui-media-box__desc">
+                <text>相对湿度：{{item.humidity}}</text>
+            </view>
+      </view>
+    </navigator>
+      
+  </view>
+</view>
+```
     
     
