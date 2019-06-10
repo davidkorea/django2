@@ -49,11 +49,28 @@ class WeatherView(View, CommonResponseMixin):       # 继承View, CommonResponse
     ```
 - `json.loads(request.body.decode('utf-8'))` will get the json data
     ```js
-     cities: [
-                {"province":"山东省", "city":"济南"},        
-                {"province":"湖南省", "city":"长沙"},
-             ]
+    {
+         cities: [
+                    {"province":"山东省", "city":"济南"},        
+                    {"province":"湖南省", "city":"长沙"},
+                 ]
+    }
     ```
     - thats why should` get('cities')` first to get the list []
-    - then iterate the list [], and get the dict{} object, then `get('city')` in each of the dict{} object
+    - then iterate the list [], and get the inner dict{} object, then `get('city')` in each of the inner dict{} object
     - cannot `get('cities').get('city')`, because `get('cities')` will get a list[]. which hs no get method
+    - add a new culumn to save the inner dict{} which contains 'province' and 'city' to wx front for show the info on page
+## 1.2 url
+```python
+from .views import weather
+
+urlpatterns = [
+    # path('weather/', weather.weather_app),
+    path('weather/', weather.WeatherView.as_view()),
+    ]
+```
+    
+    
+    
+    
+    
