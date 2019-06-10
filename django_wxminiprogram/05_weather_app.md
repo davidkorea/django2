@@ -1,4 +1,4 @@
-# 实现天气应用
+# Weather app implement
 - change to classView
 - wx weather page
 - wx pulldown refresh
