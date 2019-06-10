@@ -151,8 +151,8 @@ Page({
 ## 2.3 weather.json
 ```json
 {
-    "navigationBarTitleText": "天气",     # 配置页面名称     
-    "enablePullDownRefresh": true         # 允许下拉页面自动刷新功能        
+    "navigationBarTitleText": "天气",     // 配置页面名称     
+    "enablePullDownRefresh": true        // 允许下拉页面自动刷新功能        
 }
 ```
 
