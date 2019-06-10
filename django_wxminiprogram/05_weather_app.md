@@ -75,7 +75,6 @@ urlpatterns = [
 
 ## 2.1 weather.wxml
 ```html
-<!--pages/weather/weather.wxml-->
 <view class="weui-panel weui-panel_access">
   <view wx:if='{{isAuthorized}}' class="weui-panel__hd">您关心的城市：</view>
   <view wx:else class="weui-panel__hd">当前热门城市：</view>
@@ -101,5 +100,52 @@ urlpatterns = [
   </view>
 </view>
 ```
-    
+## 2.2 weather.js
+```js
+const app = getApp()
+const popularCities = [
+  {"province": "山东省", "city": "济南" }, 
+  {"province": "湖南省", "city": "长沙" }, 
+  {"province": "北京市", "city": "北京" },
+  {"province": "上海市", "city": "上海" }]
+
+Page({
+      data: {
+            isAuthorized: false,
+            weatherData: null
+      },
+
+     //生命周期函数--监听页面加载
+      onLoad: function (options) {
+            this.updateWeatherData()
+      },
+
+      updateWeatherData: function(){
+            var that = this
+            wx.showLoading({
+                title: 'loading',
+            })
+
+            wx.request({
+                  url: app.globalData.serverUrl + app.globalData.apiVersion + 'service/weather/',
+                  method: "POST",
+                  data: {
+                        cities: popularCities
+                  },
+                  success: function(res){
+                        var tempData = res.data.data
+                        that.setData({
+                            weatherData: tempData
+                        })
+                        wx.hideLoading()
+                  }
+            })
+      },
+      
+     //页面相关事件处理函数--监听用户下拉动作
+      onPullDownRefresh: function () {
+            this.updateWeatherData()
+      },
+})
+```
     
