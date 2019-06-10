@@ -148,4 +148,15 @@ Page({
       }
 })
 ```
+# 3. wx menu bingtap navigate page
+## 3.1 menu.wxml
+add  attributes `bindtap="onNavigatorTap" data-index="{{index}}"` to <navigator> tag
+- when touch this  <navigator> element will call `onNavigatorTap()` function defined in js file
+- `data-index="{{index}}`will pass the index of the select item of this grid. which can be got by `e.currentTarget.dataset.index` by the  `onNavigatorTap()` function
     
+```html
+<navigator url="" class="weui-grid" hover-class="weui-grid_active" bindtap="onNavigatorTap" data-index="{{index}}">
+    <image class="weui-grid__icon" src="../../resources/icons/cube.svg" />
+    <view class="weui-grid__label">{{item.app.name}}</view>
+</navigator>
+```
