@@ -143,11 +143,19 @@ Page({
       },
       
      //页面相关事件处理函数--监听用户下拉动作
-      onPullDownRefresh: function () {
-            this.updateWeatherData()
+      onPullDownRefresh: function () {      # 需要在weather.json中开启该功能
+            this.updateWeatherData()    
       }
 })
 ```
+## 2.3 weather.json
+```json
+{
+    "navigationBarTitleText": "天气",     # 配置页面名称     
+    "enablePullDownRefresh": true         # 允许下拉页面自动刷新功能        
+}
+```
+
 # 3. wx menu bingtap navigate page
 ## 3.1 menu.wxml
 add  attributes `bindtap="onNavigatorTap" data-index="{{index}}"` to <navigator> tag
