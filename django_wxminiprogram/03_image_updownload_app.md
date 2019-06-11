@@ -60,15 +60,19 @@
                         </view>
                         <view class="weui-uploader__bd">
                             <view class="weui-uploader__files" id="uploaderFiles">
+                              
                                 <block wx:for="{{needUploadFiles}}" wx:key="*this">
                                     <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
                                         <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                                     </view>
                                 </block>
+                              
                             </view>
                             
                             <view class="weui-uploader__input-box">
+                              
                                 <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                              
                             </view>
                         </view>
                     </view>
@@ -130,7 +134,7 @@ Page({
 
   previewImage: function (e) {
     wx.previewImage({
-      current: e.currentTarget.id, // 当前显示图片的http链接
+      current: e.currentTarget.id, // 当前显示图片的http链接, e.currentTarget.dataset.dataId
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
