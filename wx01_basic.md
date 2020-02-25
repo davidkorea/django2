@@ -68,45 +68,61 @@ utils目录
 
 ### 数据绑定
 - 语法{{}}
-  ```javascript
-  page({
-    data: {
-      message: 'hi wechat!',
-    }
-  })
-  ```
-  ```html
-  <view>{{ message }}</view>
-  ```
+```javascript
+page({
+  data: {
+    message: 'hi wechat!',
+  }
+})
+```
+```html
+<view>{{ message }}</view>
+```
 
 
 ### 列表渲染
 - 语法`wx:for`
-  ```javascript
-  page({
-    data: {
-      message: "hi, wechat!",
-      array: [{name:'foo'},{name:'bar'}]
-    }
-  })
-  ```
-  ```html
-  <view wx:for="{{ array }}">{{index}}: {{item.name}} </view>
-  ```
-  - `index`，列表array中的索引
-  - `item.name`，对应列表中属性为name对应的值
-  <img width="247" src="https://user-images.githubusercontent.com/26485327/75218956-7671aa80-57d6-11ea-94b6-2a55998f0d88.png">
-
-
-
-
-
-
+```javascript
+page({
+  data: {
+    message: "hi, wechat!",
+    array: [{name:'foo'},{name:'bar'}]
+  }
+})
+```
+```html
+<view wx:for="{{ array }}">{{index}}: {{item.name}} </view>
+```
+- index和item的写法由wx规定
+- `index`，列表array中的索引
+- `item.name`，对应列表中属性为name对应的值
+<img width="247" src="https://user-images.githubusercontent.com/26485327/75218956-7671aa80-57d6-11ea-94b6-2a55998f0d88.png">
 
 
 ### 条件渲染
+- 语法`wx:if`,`wx:elif`,`wx:else`
+
+
 ### 绑定事件
 
+- 生命周期回调事件，不需要开发者认为绑定
+- 页面绑定事件，需手动绑定
+  <img width="706" src="https://user-images.githubusercontent.com/26485327/75219165-044d9580-57d7-11ea-9bc4-a5c7b88f2e00.png">
+- 绑定事件的语法是以key value的形式存在
+  - key， bind 或 catch 开头，然后跟上事件响应函数的名称
+  
+```javascript
+page({
+  data: {
+    msg: 'hello',
+  },
+  tapme: function(e){
+    console.log(e)
+  },
+})
+
+<view bindtap="tapme">tap me</view>
+```
 
 
 
