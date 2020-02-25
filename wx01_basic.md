@@ -27,7 +27,7 @@ utils目录
 - 开启下拉刷新`enablePullDownRefresh：true`
 
 
-## 逻辑层
+# 2. 逻辑层
 #### 小程序注册逻辑app.js
 - App函数，全局唯一，只能调用一次。接收一个对象{}作为函数参数，里=里面包裹全局数据和声明周期函数
   ```javascript
@@ -61,6 +61,13 @@ utils目录
     - appService thread 
   <img width="517" src="https://user-images.githubusercontent.com/26485327/75216864-5a6b0a80-57d0-11ea-81a8-66427d535993.png">
   <img width="517" src="https://user-images.githubusercontent.com/26485327/75216866-5dfe9180-57d0-11ea-99fd-b85db5177275.png">
+
+# 3. 视图层
+
+
+
+
+
 
 
 
