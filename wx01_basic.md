@@ -71,7 +71,7 @@ utils目录
   ```javascript
   page({
     data: {
-      message: "hello"
+      message: 'hi wechat!',
     }
   })
   ```
@@ -81,6 +81,29 @@ utils目录
 
 
 ### 列表渲染
+- 语法`wx:for`
+  ```javascript
+  page({
+    data: {
+      message: "hi, wechat!",
+      array: [{name:'foo'},{name:'bar'}]
+    }
+  })
+  ```
+  ```html
+  <view wx:for="{{ array }}">{{index}}: {{item.name}} </view>
+  ```
+  - `index`，列表array中的索引
+  - `item.name`，对应列表中属性为name对应的值
+  <img width="247" src="https://user-images.githubusercontent.com/26485327/75218956-7671aa80-57d6-11ea-94b6-2a55998f0d88.png">
+
+
+
+
+
+
+
+
 ### 条件渲染
 ### 绑定事件
 
