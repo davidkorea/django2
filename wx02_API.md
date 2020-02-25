@@ -1,9 +1,9 @@
 
 - 微信API
   1. 网络请求
-    - HTTP请求
-    - 文件上传下载
-    - *task 网络任务对象
+      - HTTP请求
+      - 文件上传下载
+      - *task 网络任务对象
   2. 本地存储
   3. 文件系统
 - 开放能力
@@ -12,7 +12,7 @@
 
 # 1. 微信API
 ## 1.1 网络请求
-#### HTTP请求
+#### - HTTP请求
 
 > 开发者工具-设置-项目设置-不校验合法域名
 
@@ -42,6 +42,7 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log(res)
+        console.log(res.data)  // 网址对应的原始html代码
       },
       fail: function (res) {
         console.log('sorry...')
@@ -50,5 +51,6 @@ Page({
   },
 })
 ```
-<img width="850" src="https://user-images.githubusercontent.com/26485327/75221606-3661f600-57dd-11ea-98fb-86bcfb1d8617.png">
+<img width="840" src="https://user-images.githubusercontent.com/26485327/75221606-3661f600-57dd-11ea-98fb-86bcfb1d8617.png">
+<img width="840" src="https://user-images.githubusercontent.com/26485327/75223027-855d5a80-57e0-11ea-9c9c-7bafcb27eb2c.png">
 
