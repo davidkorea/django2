@@ -224,8 +224,37 @@ WeUI-wxss https://github.com/Tencent/weui
 - 样式文件可直接引用dist/style/weui.wxss
   - https://github.com/Tencent/weui-wxss/blob/master/dist/style/weui.wxss
 
-
-
+- app.wxss
+  ```css
+  @import 'thirdparty/weui.wxss';
+  ```
+- 创建grids页面在pages目录下
+  ```html
+  <view class="page">
+      <view class="page__hd">
+          <view class="page__title">Grid</view>
+          <view class="page__desc">九宫格</view>
+      </view>
+      <view class="page__bd">
+          <view class="weui-grids">
+              <block wx:for="{{grids}}" wx:key="*this">
+                  <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+                      <image class="weui-grid__icon" src="../images/icon_tabbar.png" />
+                      <view class="weui-grid__label">Grid</view>
+                  </navigator>
+              </block>
+          </view>
+      </view>
+  </view>
+  ```
+  ```javascript
+  Page({
+      data: {
+          grids: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+      }
+  });
+  ```
+  
 
 
 
