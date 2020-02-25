@@ -121,8 +121,9 @@ wx.downloadFile({
 - 触发回调函数，文件上传到10%的时候程序做什么，上传到20%的时候做什么
 - 关闭链接，http请求或者是socket请求，关闭请求
 
+-----
 
-# 2. 本地存储
+## 1.2 本地存储
 
 将数据存储在 本地 缓存中 指定的 key中，数据存储生命周期和小程序本身一直（类似sessionStorage吧？）
 
@@ -131,7 +132,8 @@ wx.downloadFile({
 - wx.removeStorage，根据key删除数据
 - wx.clearStorage，慎用，清除掉本地所有缓存
 
-## 2.1 setStorage & getStorage
+### 1.2.1 setStorage & getStorage
+> 异步请求
 ```html
 <view bindtap="testNetwork">tap me to test network</view>
 ```
@@ -161,6 +163,66 @@ testStoreage: function(){
 ```
 <img width="753" src="https://user-images.githubusercontent.com/26485327/75226821-f6ecd700-57e7-11ea-9a76-98b437c9b178.png">
 
+### 1.2.2 setStorageSync & getStorageSync
+> 同步请求
+
+- `wx.setStorageSync(key, data)`
+- `var data = wx.getStorageSync(key)`
+
+-----
+
+## 1.3 文件系统
+1. 全局文件管理器
+2. 文件的增删改查
+3. 文件夹的操作
+### 1.3.1 全局文件管理器
+获取全局唯一的文件管理器
+```javascript
+var fs = wx.getFileSystemManager()
+```
+
+### 1.3.2 文件的增删改查
+fs是getFileSystemManager的对象
+- `fs.saveFile`
+- `fs.removeSavedFile`
+- `fs.writeFile`
+- `fs.readFile`
+- `fs.appendFile`
+
+### 1.3.3 文件夹的操作
+fs是getFileSystemManager的对象
+- `fs.mkdir` 
+- `fs.rmdir` 
+- `fs.isDirectory` 
+- `fs.isFile` 
+
+
+-----
+
+# 2. 开放能力
+## 2.1 用户数据
+### 1. 头像、昵称等公开信息
+wx.getUserInfo()
+
+### 2. openid等敏感数据
+openid用于识别不同用户，开发者不能直接使用
+
+<img width="600" src="https://user-images.githubusercontent.com/26485327/75233270-8f3c8900-57f3-11ea-99c0-7f2be12c3697.png">
+
+## 2. 推送消息
+推送信息至服务号
+
+## 3. 运营数据
+- 小程序管理后台 - 统计
+- 小程序数据助手 官方小程序
+
+-----
+
+# 3. 基础组件
+WeUI-wxss https://github.com/Tencent/weui
+
+- 样式文件可直接引用dist/style/weui.wxss
+  - https://github.com/Tencent/weui-wxss/blob/master/dist/style/weui.wxss
 
 
 
@@ -172,3 +234,4 @@ testStoreage: function(){
 
 
 
+  
