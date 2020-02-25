@@ -16,7 +16,7 @@
 
 ### 1.1.1 HTTP请求
 
-#### 语法
+#### - 语法
 注意Page函数中接收一个对象，所以函数创建的方式是`函数名：匿名函数(){ API }`
 ```javascript
 wx.request({
@@ -55,7 +55,7 @@ Page({
 <img width="840" src="https://user-images.githubusercontent.com/26485327/75221606-3661f600-57dd-11ea-98fb-86bcfb1d8617.png">
 <img width="840" src="https://user-images.githubusercontent.com/26485327/75223027-855d5a80-57e0-11ea-9c9c-7bafcb27eb2c.png">
 
-## Http请求的异步特性
+#### - Http请求的异步特性
 - wx.request请求发送至后就完成了，不管返回是success还是fail，也不管什么时候返回结果
   - 直接执行后面的过程
   - 什么时候http的请求结果回来了，成功就调用success，失败就调用fial
@@ -83,7 +83,83 @@ testNetwork: function(){
 - 因为在http请求拿到成功返回的结果之前，程序没有等待，而是执行了下面的代码
 - 也就是在成功拿到http的返回值之前，变量data没有被赋值，因此还是undefined
 
+-----
 
+### 1.1.2 文件上传下载
+```javascript
+wx.uploadFile({
+  url: '服务端地址',
+  filePath: 'image1.png',
+  name: 'file1',
+  header: {},
+  formData: {'user':'adminUser'},
+  success: function(res) {},
+  fail: function(res) {},
+  complete: function(res) {},
+})
+
+wx.downloadFile({
+  url: '',
+  header: {},
+  success: function(res) {},
+  fail: function(res) {},
+  complete: function(res) {},
+})
+```
+
+#### 1.1.3 *task
+
+由于网络请求的任务都是异步的，那么当这个任务提交之后，还需要对这个任务进行操作，需要使用
+
+- Http请求 - Requesttask
+- 上传文件请求 - UploadTask
+- 下载文件请求 - DownloadTask
+- socket请求 - SocketTask
+
+拿到对应该任务的task后，可以进行的操作
+- 中断任务，中途取消上传文件
+- 触发回调函数，文件上传到10%的时候程序做什么，上传到20%的时候做什么
+- 关闭链接，http请求或者是socket请求，关闭请求
+
+
+# 2. 本地存储
+
+将数据存储在 本地 缓存中 指定的 key中，数据存储生命周期和小程序本身一直（类似sessionStorage吧？）
+
+- wx.setStorage，保存数据到指定key中
+- wx.getStorage，根据key取出数据
+- wx.removeStorage，根据key删除数据
+- wx.clearStorage，慎用，清除掉本地所有缓存
+
+## 2.1 setStorage & getStorage
+```html
+<view bindtap="testNetwork">tap me to test network</view>
+```
+```javascript
+Page({
+
+testStoreage: function(){
+    wx.setStorage({
+      key: 'key1',
+      data: 'value1',
+      success: function(res) {
+        console.log(res)
+        console.log('store success')
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+
+    wx.getStorage({
+      key: 'key1',
+      success: function(res) {
+        console.log('value of key1: ',res.data)
+      },
+    })
+  },
+})
+```
+<img width="753" src="https://user-images.githubusercontent.com/26485327/75226821-f6ecd700-57e7-11ea-9a76-98b437c9b178.png">
 
 
 
