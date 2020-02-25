@@ -28,17 +28,47 @@ utils目录
 
 
 ## 逻辑层
-- 小程序注册逻辑app.js
-  - ```App({
-    onLaunch(){}
-    onShow(){}
-    onHide(){}
-    ...
-    globalData:{}
-  })
-  `
+#### 小程序注册逻辑app.js
+- App函数，全局唯一，只能调用一次。接收一个对象{}作为函数参数，里=里面包裹全局数据和声明周期函数
+  ```javascript
+    App({
+      onLaunch(){}
+      onShow(){}
+      onHide(){}
+      ...
+      globalData:{}
+    })
+    ```
 
-- 页面注册逻辑
+#### 页面注册逻辑
+- page函数，和App类似
+- 页面数据
+  - data属性，所有页面数据都保存在data属性里，data是一个对象
+    ```javascript
+    data: {
+      message: "hello world"
+    }
+    ```
+    - 通过`this.data.message`即可获得属性对应的值
+    - 通过`this.setData({'message':'hi world'})`
+    
+  - 使用全局数据
+    - 首先获取App实例`const app = getApp()`
+    - 在获取全局数据`var data = app.globalData`
+    
+- 页面声明周期
+  - 页面启动时，一下两个线程同时启动
+    - view thread
+    - appService thread
+
+
+
+
+
+
+
+
+
 
 
 
