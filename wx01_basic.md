@@ -58,10 +58,9 @@ utils目录
 - 页面声明周期
   - 页面启动时，一下两个线程同时启动
     - view thread
-    - appService thread
-    
-<img width="517" src="https://user-images.githubusercontent.com/26485327/75216864-5a6b0a80-57d0-11ea-81a8-66427d535993.png">
-<img width="517" src="https://user-images.githubusercontent.com/26485327/75216866-5dfe9180-57d0-11ea-99fd-b85db5177275.png">
+    - appService thread 
+  <img width="517" src="https://user-images.githubusercontent.com/26485327/75216864-5a6b0a80-57d0-11ea-81a8-66427d535993.png">
+  <img width="517" src="https://user-images.githubusercontent.com/26485327/75216866-5dfe9180-57d0-11ea-99fd-b85db5177275.png">
 
 
 
