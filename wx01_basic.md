@@ -56,7 +56,9 @@ utils目录
     }
     ```
     - 通过`this.data.message`即可获得属性对应的值
-    - 通过`this.setData({'message':'hi world'})`
+    - 通过`this.setData({'message':'hi world'})`更改数据的值
+    - 这是逻辑层js文件中js的处理方法，在page界面里，data中的变量可以直接使用变量名message，而无需使用this.data.message
+    
     
   - 使用全局数据
     - 首先获取App实例`const app = getApp()`
@@ -90,7 +92,7 @@ page({
 #### 列表渲染
 - 语法`wx:for`
 ```javascript
-page({
+Page({
   data: {
     message: "hi, wechat!",
     array: [{name:'foo'},{name:'bar'}]
@@ -100,6 +102,7 @@ page({
 ```html
 <view wx:for="{{ array }}">{{index}}: {{item.name}} </view>
 ```
+- **Page函数下的data中定义的变量，在wxml中直接调用变量名使用，而不是data.meaasge**
 - index和item的写法由wx规定
 - `index`，列表array中的索引
 - `item.name`，对应列表中属性为name对应的值
