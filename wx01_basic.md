@@ -28,8 +28,10 @@ utils目录
 
 -----
 # 2. 小程序框架
-<img width="510" src="https://user-images.githubusercontent.com/26485327/75220168-bf772e00-57d9-11ea-88ea-d7f107a0ecdc.png">
-<img width="510" src="https://user-images.githubusercontent.com/26485327/75219806-c6517100-57d8-11ea-95b1-de27a0d69e34.png">
+
+<img width="410" src="https://user-images.githubusercontent.com/26485327/75220168-bf772e00-57d9-11ea-88ea-d7f107a0ecdc.png">
+
+<img width="410" src="https://user-images.githubusercontent.com/26485327/75219806-c6517100-57d8-11ea-95b1-de27a0d69e34.png">
 
 ## 2.1 逻辑层 js
 
@@ -117,7 +119,9 @@ Page({
 
 - 生命周期回调事件，不需要开发者认为绑定
 - 页面绑定事件，需手动绑定
+
   <img width="510" src="https://user-images.githubusercontent.com/26485327/75219165-044d9580-57d7-11ea-9bc4-a5c7b88f2e00.png">
+
 - 绑定事件的语法是以key value的形式存在
   - key， bind 或 catch 开头，然后跟上事件响应函数的名称
   
