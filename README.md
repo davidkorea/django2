@@ -34,7 +34,7 @@ pip 19.0.3 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f
 ```
 david@DaviddeMacBook-Pro  ~  pip install virtualenv
 ```
-虚拟环境，就是一个代码运行环境而已，文件系统和物理机mac一样。
+虚拟环境，就是一个代码运行环境而已，**文件系统和物理机mac一样，也有自己的pip工具**
   - 虚拟环境单独创建一个文件目录做管理，所有python虚拟环境全部放到一个目录下
   - 而创建python项目时，需要单独存放到另外一个专门用户代码项目的目录
   - 即，虚拟环境放在：/Users/david/python-envs, 项目放在/Users/david/PycharmProjects
@@ -50,6 +50,8 @@ david@DaviddeMacBook-Pro  ~  pip install virtualenv
 - ```mkdir first-project```
 
 #### 2.2 python -m venv
+与上面将 python虚拟环境 和 项目代码 放在不同目录下 不同，下面是将二者放到同一个大目录下
+
 所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面
 
 ```
