@@ -16,9 +16,11 @@ david@DaviddeMacBook-Pro  ~  pip --version
 pip 18.1 from /Users/david/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
-> 更新 200227
+> **更新 200227**
 - 即使使用pip安装，也是由anaconda的python3.7安装，不是安装到系统自带的python2.7中
 - 使用pip3安装virtualenv，会安装到系统自带的python3.7环境中
+- 如果没有安装anaconda3，那么系统如果只有一个python3环境，使用pip直接安装到python3中
+  - 如果存在两个版本的python，那么pip安装到python2中，pip3安装到python3中
 ```
 yong@MacBookPro ~ % pip --version
 pip 19.2.3 from /Users/yong/opt/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
