@@ -14,6 +14,12 @@
 
 -----
 
+- [anaconda3初始安装设置terminal环境变量 #1](https://github.com/davidkorea/django2/issues/1#issue-571842494)
+- [python venv, virtualenv, virtualenvwrapper 虚拟环境比较 #2](https://github.com/davidkorea/django2/issues/2#issue-571906883)
+
+
+-----
+
 
 - dj01
   - 安装anaconda，设置环境变量
