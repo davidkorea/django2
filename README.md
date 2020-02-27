@@ -10,7 +10,9 @@
 - Web应用框架
   - 使用一种语言，封装了常用的Web功能的框架，jdango，flask等
 
+**浏览器 -> Web服务器ngnix -> 应用服务器python -> Web框架django**
 
+-----
 
 
 - dj01
