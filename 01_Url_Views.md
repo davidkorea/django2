@@ -9,11 +9,11 @@
 // urls.py
 from django.http import HttpResponse
 
-def index(response):
+def index(request):
     return HttpResponse('hello index')
 
 
-def book(response):
+def book(request):
     return HttpResponse('book page')
 
 urlpatterns = [
@@ -23,8 +23,58 @@ urlpatterns = [
 ]
 ```
 
+- 对于多页面来说，所有url对应的视图函数都写再一起也是不现实的，因此需要将不同页面的视图函数写在其他Python Package里面
+    - 在项目根目录下创建 Pycharm - New - Python Package - book
+    ```shell
+    yong@MacBookPro dj_project_1 % tree -L 2
+    .
+    ├── book                // 新建Python Package命名为book
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   └── views.py        // views里面创建book的函数
+    ├── db.sqlite3
+    ├── dj_project_1
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   ├── asgi.py
+    │   ├── settings.py
+    │   ├── urls.py         // from book.views import book
+    │   └── wsgi.py
+    ├── manage.py
+    └── venv
+        ├── bin
+        ├── include
+        ├── lib
+        └── pyvenv.cfg
+    ```
+```python
+//book/views.py
+from django.http import HttpResponse
+
+def book(request):
+    return HttpResponse('book page')
+```
+```python
+// urls.py
+from book.views import book
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index),
+    path('book/', book)
+]
+```
 
 
+
+
+
+
+-----
+
+-----
+
+-----
 
 因为随着业务变动，网址会变化，而代码也要全部跟着修改路由网址。直接命名一个网址，方便后期变更路由网址
 
