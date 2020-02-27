@@ -4,16 +4,21 @@
 > - 一个Url对应着一个函数，该函数去执行一些访问数据库等操作
 > - 这个函数就叫做视图函数，返回网页视图中所需数据的内容的函数
 > - 访问一个网址url就相当于访问一个函数，函数执行的结果展现为网页
-```python
+> ```python
 // urls.py
 from django.http import HttpResponse
 
 def index(response):
     return HttpResponse('hello index')
 
+
+def book(response):
+    return HttpResponse('book page')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index)     // 访问主机名127.0.0.1:8000 返回该页面
+    path('', index),                  // 访问主机名127.0.0.1:8000 返回该页面
+    path('book/',book)                // 访问主机名127.0.0.1:8000/book 返回该页面
 ]
 ```
 
