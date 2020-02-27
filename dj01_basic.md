@@ -56,10 +56,12 @@ virtualenvwrapper创建个虚拟环境时，不论在哪个目录下运行，都
 
 
 ## 2.3 python -m venv
-与上面将 python虚拟环境 和 项目代码 放在不同目录下 不同，下面是将二者放到同一个大目录下
 
-所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面
+> 与上面将 python虚拟环境 和 项目代码 放在不同目录下 不同，另一种思路是将二者放到同一个大目录下。但是还是推荐分开存放，否则每一个项目都需要创建一个单独的运行环境，太浪费了
 
+`python -m venv`，是从python3.3版本开始自带的工具，使用和virtualenv类似，但是2.7版本不能使用venv
+
+所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面。但是推荐将运行环境和项目分开管理
 ```
  david@DaviddeMacBook-Pro  ~/PycharmProjects  mkdir first-project
  david@DaviddeMacBook-Pro  ~/PycharmProjects  cd first-project
@@ -78,7 +80,7 @@ django-env     django_project
 - ```cd django_project```
 - ```python manage.py runserver [port9000]```, port default=8000,也可以手动指定
 
-#### 3.2 same subnet access
+## 3.2 same subnet access
 
 - edit settings.py
 ```diff
