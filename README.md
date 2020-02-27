@@ -2,7 +2,7 @@
 https://brew.sh/
 
 
-## 1. iterm2 + zsh
+# 1. iterm2 + zsh
 - [iTerm2 + Oh My Zsh 打造舒适终端体验](https://www.jianshu.com/p/9c3439cc3bdb)
 - [zsh 下Anaconda的安装](https://www.jianshu.com/p/74b1c60148e8)
   
@@ -28,9 +28,9 @@ pip 19.2.3 from /Users/yong/opt/anaconda3/lib/python3.7/site-packages/pip (pytho
 yong@MacBookPro ~ % pip3 --version
 pip 19.0.3 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python3.7/site-packages/pip (python 3.7)
 ```
-## 2. python virtualenv
+# 2. python virtualenv virtualenvwrapper
 
-#### 2.1 virtualenv
+## 2.1 virtualenv
 ```
 david@DaviddeMacBook-Pro  ~  pip install virtualenv
 ```
@@ -49,7 +49,13 @@ david@DaviddeMacBook-Pro  ~  pip install virtualenv
 - ``` cd PycharmProjects```
 - ```mkdir first-project```
 
-#### 2.2 python -m venv
+## 2.2 virtualenvwrapper
+上面的virtualenv 需要自己将python虚拟单独放到一个目录，再把项目代码放到其他项目
+
+virtualenvwrapper创建个虚拟环境时，不论在哪个目录下运行，都会将环境创建在固定的文件目录下
+
+
+## 2.3 python -m venv
 与上面将 python虚拟环境 和 项目代码 放在不同目录下 不同，下面是将二者放到同一个大目录下
 
 所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面
@@ -67,8 +73,8 @@ django-env
 django-env     django_project
 (django-env)  david@DaviddeMacBook-Pro  ~/PycharmProjects/first-project 
 ```
-## 3. run webserver
-#### 3.1 local access
+# 3. run webserver
+## 3.1 local access
 - ```cd django_project```
 - ```python manage.py runserver [port9000]```, port default=8000,也可以手动指定
 
