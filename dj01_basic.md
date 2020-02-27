@@ -57,9 +57,11 @@ virtualenvwrapper创建个虚拟环境时，不论在哪个目录下运行，都
 
 ## 2.3 python -m venv
 
+> 我觉着，与其安装上面的三方包，还不如自带的好用！！！！
 > 与上面将 python虚拟环境 和 项目代码 放在不同目录下 不同，另一种思路是将二者放到同一个大目录下。但是还是推荐分开存放，否则每一个项目都需要创建一个单独的运行环境，太浪费了
 
-`python -m venv`，是从python3.3版本开始自带的工具，使用和virtualenv类似，但是2.7版本不能使用venv
+- `python -m venv $venv_Name`，是从python3.3版本开始自带的工具，使用和virtualenv类似，但是2.7版本不能使用venv
+- 需要先进入到存放虚拟环境的目录，再运行上面的命令，以将新虚拟环境创建在该目录下
 
 所有虚拟环境，和项目code 全部在创建的同一个文件夹PycharmProjects/django-project下面。但是推荐将运行环境和项目分开管理
 ```
