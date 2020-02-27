@@ -1,4 +1,24 @@
-# URL与视图View匹配
+# 网址URL与视图View绑定/映射
+
+> 200227更新
+> - 一个Url对应着一个函数，该函数去执行一些访问数据库等操作
+> - 这个函数就叫做视图函数，返回网页视图中所需数据的内容的函数
+> - 访问一个网址url就相当于访问一个函数，函数执行的结果展现为网页
+```python
+// urls.py
+from django.http import HttpResponse
+
+def index(response):
+    return HttpResponse('hello index')
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index)     // 访问主机名127.0.0.1:8000 返回该页面
+]
+```
+
+
+
 
 因为随着业务变动，网址会变化，而代码也要全部跟着修改路由网址。直接命名一个网址，方便后期变更路由网址
 
