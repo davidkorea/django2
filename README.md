@@ -9,9 +9,22 @@ https://brew.sh/
 之前使用mac自带终端sh命令，安装了anaconda3 可以使用python3 和 pip。 但是iterm设置为默认终端后，并该用zsh命令，全部都不可以使用了。
 
 按照上面都说法，将anaconda环境变量导入至```.zshrc```中，即可使conda和pip命令，默认python3
+- `export PATH="/Users/yong/opt/anaconda3/bin:$PATH"`
+
 ```zsh
 david@DaviddeMacBook-Pro  ~  pip --version
 pip 18.1 from /Users/david/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
+```
+
+> 更新 200227
+- 即使使用pip安装，也是由anaconda的python3.7安装，不是安装到系统自带的python2.7中
+- 使用pip3安装virtualenv，会安装到系统自带的python3.7环境中
+```
+yong@MacBookPro ~ % pip --version
+pip 19.2.3 from /Users/yong/opt/anaconda3/lib/python3.7/site-packages/pip (python 3.7)
+
+yong@MacBookPro ~ % pip3 --version
+pip 19.0.3 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python3.7/site-packages/pip (python 3.7)
 ```
 ## 2. python virtualenv
 
