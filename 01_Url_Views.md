@@ -64,10 +64,32 @@ urlpatterns = [
     path('book/', book)
 ]
 ```
+- 上面手动创建的Python Package在django中叫做app，可以直接通过命令来创建`python manage.py startapp $appName`
+  - `(py3-dj2) yong@MacBookPro dj_project_1 % python manage.py startapp movie`
 
-
-
-
+```shell
+(py3-dj2) yong@MacBookPro dj_project_1 % tree -L 2                     
+.
+├── book
+│   ├── __init__.py
+│   ├── __pycache__
+│   └── views.py
+├── dj_project_1
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── movie
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+```
 
 
 -----
