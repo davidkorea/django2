@@ -404,7 +404,30 @@ def login(request, username, id)
 ```
 
 
+# 4. 获取多页数据，首页默认不显示页数
 
+- `hostname/`，虽然url没有显示，确是显示page 1 的数据，
+- `hostname/page/2`，从第二页开始，url开始出现页面信息
+
+
+```python
+// urls.py
+
+urlpatterns = [
+    path('', views.page),
+    path('page/<int:page>/', views.page)
+]
+```
+```python
+// views.py
+
+from django.http import HttpResponse
+
+page_list = ['page0', 'page1', 'page2']
+
+def page(request, page=0):
+    return HttpResponse(page_list[page])
+```
 
 
 
