@@ -293,17 +293,23 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 # 1. include()函数详解
 
 > 上面说到， 如果使用实例命名空间namespace，则必须设定应用命名空间app_name，二者搭配使用。处理分别创建这两个命名空间，还可以在全局urls.py中一并舍弟过
+> - **下面两种方式，不如上面的方法常用，因为不够简洁，不好理解。了解下面的2种用法就可以。我不用，但我懂**
 
-### 3.5.1 全局url中设置app命名空间
+## 1.1 全局url中设置app命名空间
 
 也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
-
+```python
+urlpatterns = [
+    path('cms/', include(('cms.urls', app_name), namespace=None))  # tuple中（子模块url，app_name ）
+]
+```
 ```python
 urlpatterns = [
     path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子模块url，app_name ）
 ]
 ```
-### 3.5.2 直接将app目录下的url内容写在include（）函数内
+
+## 2.2 直接将app目录下的url内容写在include（）函数内
 ```python
 from book import views
 
@@ -312,7 +318,12 @@ path('book/', include([
     path('list/', views.book_list)
 ])),
 ```
-# 4. re_path 正则表达式匹配url
+
+
+
+
+
+# 2. re_path 正则表达式匹配url
 **特殊情况再用re_path，能用path就用path**
 
 - 创建一个新的app
