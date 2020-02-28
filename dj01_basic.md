@@ -127,7 +127,29 @@ django-env     django_project
 │   └── wsgi.py
 └── manage.py
 ```
-# 5. view, URL pass params
+
+# 5. Debug
+
+settings.py 文件中默认开始Debug模式`DEBUG = True`
+1. 保存变更后，启动重启网页服务，实时更新变更内容
+2. 网页和console同时提示报错
+3. 生产环境要禁止DEBUG，否则对用户不友好，且外人可以看到源码，有安全隐患
+    ```python
+    DEBUG = False
+    ALLOWED_HOSTS = ['13.197.150.200', '127.0.0.1']
+    ```
+    - debug关闭后，django要求必须指定服务器地址或者域名以用于外部访问，否则程序报错
+
+
+
+
+
+
+
+-----
+
+
+# 6. view, URL pass params
 每个app的视图函数 view.py中的函数，第一个参数必须是request，绝对不能少，返回值必须是HttpresponseBase子类。
 
 这个request对象中包含来所有客户端传递过来的信息。
