@@ -190,21 +190,29 @@ urlpatterns = [
   ```
 - 访问URL：http://127.0.0.1:8000/author/?id=123
   ![](https://i.loli.net/2019/06/07/5cfa180f0aec016071.png)
-  
-参考设置
+
+# 3. Url的模块化 include()函数详解
+如果项目越来越大，所有url都放在全局urls里面管理太乱，因此每个app都将管理所有有关本app的urls路由
+
+项目全局urls.py只负责大类别的路由，具体细节路由由各个app内部urls.py负责
 ```python
-// book/views.py
-def book(request):
-    id = request.GET.get('id')
-    if id:
-        return HttpResponse('your book id is : {}'.format(id))
-    else:
-        return HttpResponse('book page')
+// project urls.py
+from django.urls import path,include
+urlpatterns = [
+    path('', index),
+    path('book/', include('book.urls'))
+    # 所有book/开头的url都讲使用book.urls里面的规则
+]
 ```
-- url中有传递参数时，返回book id
-- 没有传递参数时，现实主页
-
-
+所有book/开头的url都将使用book.urls里面的规则
+```python
+// book urls.py
+from .import views
+urlpatterns = [
+    path('', views.book),    # 返回hostnaame/book/
+    path('details/', views.book_details)  # 返回hostnaame/book/details
+]
+```
 
 
 
@@ -212,13 +220,17 @@ def book(request):
 
 -----
 
------
 
-因为随着业务变动，网址会变化，而代码也要全部跟着修改路由网址。直接命名一个网址，方便后期变更路由网址
-
-Demo：一个项目中2个app，front（index，login） + CMS（index，login）
 
 # 1. 创建Demo
+因为随着业务变动，网址会变化，而代码也要全部跟着修改路由网址。直接命名一个网址，方便后期变更路由网址
+
+Demo：一个项目中2个app
+1. 前端 front（index，login） 
+2. 后台 CMS（index，login）
+
+
+
 ```
 (django-env)  david@MBP  ~/PycharmProjects/first-project  django-admin startproject demo_url
 (django-env)  david@MBP  ~/PycharmProjects/first-project  ls
@@ -272,7 +284,9 @@ def login(request):
     return HttpResponse('Front Login')
 ```
 ### 2. create urls.py in current app path
-- create urls.py
+当前app的PythonPackage里面创建一个针对当前app的url.py文件
+
+- create urls.py in front app
   ```python
   from django.urls import path
   from . import views
@@ -282,7 +296,7 @@ def login(request):
       path('login/', views.login)
   ]
   ```
-### 3. glocal urls.py
+### 3. global urls.py
 import include 来调用app本地的url路由
 
 ```python
@@ -290,13 +304,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('front.urls')),
+    path('', include('front.urls')),    // 引用app的本地路由文件
     path('cms/', include('cms.urls'))
 ]
 ```
 
 ## 2.2 cms
-
+因为前台和后台分别有 首页 和 登录 功能，函数从上面完整复制下来即可
 ### 1. views
 ```python
 from django.http import HttpResponse
@@ -318,11 +332,20 @@ def login(request):
       path('', views.index),
       path('login/', views.login)
   ]
-### 3. glocal urls.py
-all have been done above
+### 3. global urls.py
+path('cms/',inclued('cms/urls'))
 
-# 3. Advanced Functions
+
+
+
+# 3. Url命名，页面重定向
+
+实际项目中url的变更很常见，比如登录页面的url需要从login改成signin
+- 这种情况下需要对项目全局的urls.py中为每个路由，命名，这样不论子页面的路径名称如何变化，其他页面只调用其名称即可
+- 如下 访问主页时，重定向至登录页面
+
 ##  3.1 If no username passed， redirect to login page
+
 使用GET请求来传递参数的方式进行
 ```python
 from django.http import HttpResponse
@@ -337,17 +360,19 @@ def index(request):
 ```
 ## 3.2 If route urls changed, Nmae a url
 
+> 无论url路径怎么变，只要命名name不变，随时可以引用
+
 if modify url login -> signin, the urls.py and views.py redirect in the local app path should be changed both. For a easy way, give an url a name, and reverse a name to a real url.
-- urls.py
+- app urls.py
     ```python
     from django.urls import path
-    from . import views
+    from . import views                             # 当下路径下导入views文件
     urlpatterns = [
         path('', views.index, name='index'),
         path('signin/', views.login, name='login')  # url改名为signin，但是该url的名字为login
     ]
     ```
-- views.py
+- app views.py
     ```python
     from django.http import HttpResponse
     from django.shortcuts import redirect, reverse
@@ -360,23 +385,27 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
             return redirect(reverse('login'))       # 现将名字为login路径反转为url，再重定向至该url  
     ```
 
-## 3.3 应用命名空间
+# 4. 应用命名空间
 
-因为前端和后台都有index和login两个页面。如果各自的url都取名为name=index和name=login，那么`redirect(reverse('login'))`时，django会一脸懵逼，不能正确路由。使用app_name, `redirect(reverse('app_name:login'))`来重定向。
+不同app具有相同的url名name，会出现页面路由错误，通过在各自app内的urls.py中为每个app设置一个`app_name`来解决
+
+因为前端和后台都有index和login两个页面。如果各自的url都取名为name=index和name=login，那么`redirect(reverse('login'))`时，django会一脸懵逼，不能正确路由
+
+**在app的urls.py中使用app_name**, `redirect(reverse('app_name:login'))`来重定向。
 
 - front urls.py
     ```python
     from django.urls import path
     from . import views
 
-    app_name = 'front'
+    app_name = 'front'              // 给每个app去取个名字，用于url定向
 
     urlpatterns = [
         path('', views.index, name='index'),
         path('signin/', views.login, name='login')
     ]
     ```
-- cmd urls.py
+- cms urls.py
     ```python
     from django.urls import path
     from . import views
@@ -401,7 +430,7 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
             return redirect(reverse('front:login'))
     ```
 
-## 3.4 实例命名空间
+# 5. 实例命名空间
 
 当同一个app有2个不同当url时，redirect会乱套，需要给每一个url指定一个名称。比如cms1和cms2两个url都定向于cms app，如果没有username，则重定向到cms/login页面
 
@@ -457,11 +486,12 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 
 > **若使用实例命名空间，必须要指定应用命名空间app_name**
 
-## 3.5 include()函数详解
+# 6. include()函数详解
 
-虽然这样用的不多，但是能看懂别人代码为什么这么些
 
 ### 3.5.1 应用命名空间
+虽然这样用的不多，但是能看懂别人代码为什么这么写
+
 也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
 ```python
 urlpatterns = [
