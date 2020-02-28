@@ -164,17 +164,15 @@ urlpatterns = [
 此方法，视图函数无需写传递参数的变量。使用`request.GET.get('paras in url with ?')`
 
 - 前端html中的input控件中的name值和value值 会显示再url中的？后面
-- django 的Urls.py分析传递过来的url后将参数分析出来
-- 再视图函数中通过get方法获得参数
+- django 的Urls.py分析传递过来的url后将参数分析出来，再在视图函数中通过get方法获得参数
 - 控件使用：[30days_frontend:form](https://github.com/davidkorea/30days_frontend/blob/master/form.md)
 
+设置如下
 
-
-- django的 
 - views
   ```python
   def author_details(request):                        # 无需传递参数变量
-    author_id = request.GET.get('id')                 # URL中通过 .../?id=123，G，ET请求来传递参数
+    author_id = request.GET.get('id')                 # URL中通过 .../?id=123，GET请求来传递参数
     text = 'The author id is : {}'.format(author_id)
     return HttpResponse(text)  
   ```
@@ -193,7 +191,22 @@ urlpatterns = [
 - 访问URL：http://127.0.0.1:8000/author/?id=123
   ![](https://i.loli.net/2019/06/07/5cfa180f0aec016071.png)
   
-  
+参考设置
+```python
+// book/views.py
+def book(request):
+    id = request.GET.get('id')
+    if id:
+        return HttpResponse('your book id is : {}'.format(id))
+    else:
+        return HttpResponse('book page')
+```
+- url中有传递参数时，返回book id
+- 没有传递参数时，现实主页
+
+
+
+
 
 -----
 
