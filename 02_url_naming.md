@@ -323,7 +323,7 @@ path('book/', include([
 
 
 
-# 2. re_path 正则表达式匹配url
+# 2. re_path() 正则表达式匹配url
 **特殊情况再用re_path，能用path就用path**
 
 - 创建一个新的app
@@ -378,6 +378,57 @@ path('book/', include([
 **除非必须要使用正则表达式使用re_path()，否则path就可以了，否则今天写完正则后，明天看不明白什么意思**
 
 ![](https://i.loli.net/2019/06/07/5cfa81a7b1e8649572.png)
+
+
+
+# 3. reverse()
+
+对url命名后，使用reverse反转url，需要设置参数时，可以传递`kwargs`参数到reverse()
+
+
+## 3.1 参数方式传递参数
+
+```python
+
+url = reverse('login', kwargs={"username":"david", "id":1})
+```
+
+
+## 3.2 GET方式获取?参数
+
+需要手动拼接字符串
+
+```python
+def login(request, username, id)
+  url = reverse('login') + '?username= username&id=id/'
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
