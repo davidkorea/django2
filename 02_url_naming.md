@@ -428,6 +428,7 @@ page_list = ['page0', 'page1', 'page2', 'page3']
 def page(request, page=0):
     return HttpResponse(page_list[page])
 ```
+- 指定默认参数，用于匹配url规则，否则会报错
 
 ![Feb-28-2020 16-38-50](https://user-images.githubusercontent.com/26485327/75524440-da030e80-5a48-11ea-8a84-10c0c330193b.gif)
 
