@@ -423,7 +423,7 @@ urlpatterns = [
 
 from django.http import HttpResponse
 
-page_list = ['page0', 'page1', 'page2']
+page_list = ['page0', 'page1', 'page2', 'page3']
 
 def page(request, page=0):
     return HttpResponse(page_list[page])
