@@ -9,13 +9,14 @@ DTL， django template language，是django自带的模板语言，是一种带�
 - 添加该模板文件夹3全局设定中settings.py
   ```diff
   TEMPLATES = [
-    {
+     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-   -    'DIRS': [],
-   +    'DIRS': ['templates/'],
+  -     'DIRS': [],
+  -     'DIRS': ['templates/'],
+  +     'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         ...
-    }
+     }
   ```
 - 创建模板html文件index.html
 
