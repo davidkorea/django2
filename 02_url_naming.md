@@ -216,6 +216,18 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
     ```
 
 # 4. 实例命名空间
+同一个app，分别由两个不同的url对应
+- hostname/cms1/ -> cms app
+- hostname/cms2/ -> cms app
+
+实例命名空间就是，如上，有几个url的映射，就有几个实例
+
+还是上面的场景，url中传递username参数，则返回从cms index页面，否则重定向只cms login页面，出现混乱
+- 无username，访问cms1/，重定向只cms1/login
+- 无username，访问cms2/，依然，重定向只cms1/login
+
+因此需要对不同实例，在全局urls.py中创建一个唯一的实例命名空间。这样在视图函数中重定向时，可以根据实例命名空间进行重定向
+
 
 当同一个app有2个不同当url时，redirect会乱套，需要给每一个url指定一个名称。比如cms1和cms2两个url都定向于cms app，如果没有username，则重定向到cms/login页面
 
@@ -265,22 +277,30 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
             return HttpResponse('CMS index')
         else:
     -       return redirect(reverse('cms:login'))
-    +       current_namespace = request.resolver_match.namespace        # 获取当前的namespace
+    +       current_namespace = request.resolver_match.namespace        # 获取当前url的namespace
     +       return redirect(reverse('%s:login'%current_namespace))
     ```
 
-> **若使用实例命名空间，必须要指定应用命名空间app_name**
-
-# 6. include()函数详解
+> **若使用实例命名空间，必须要指定应用命名空间app_name，必须同时指定，否则程序报错**
 
 
-### 3.5.1 应用命名空间
-虽然这样用的不多，但是能看懂别人代码为什么这么写
+
+-----
+
+-----
+
+
+# 1. include()函数详解
+
+> 上面说到， 如果使用实例命名空间namespace，则必须设定应用命名空间app_name，二者搭配使用。处理分别创建这两个命名空间，还可以在全局urls.py中一并舍弟过
+
+### 3.5.1 全局url中设置app命名空间
 
 也可以，不在app目录下的url指定应用命名空间app_name，直接在global url中指定
+
 ```python
 urlpatterns = [
-    path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子木块url，app_name ）
+    path('cms/', include(('cms.urls', 'cms'), namespace=None))  # tuple中（子模块url，app_name ）
 ]
 ```
 ### 3.5.2 直接将app目录下的url内容写在include（）函数内
