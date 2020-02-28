@@ -106,7 +106,7 @@ urlpatterns = [
 
 传递参数有两种方式
 1. 再视图函数中写好参数，并在urls.py中的路由设置好对应参数
-2. 使用http get方法，直接将url中问好？后面的键值对传递给视图函数，而视图函数无需提前定义该变量
+2. [常用]使用http get方法，直接将url中问好？后面的键值对传递给视图函数，而视图函数无需提前定义该变量
 
 ## 2.1 URL传递参数1，可传递多个参数
 - ```python manage.py startapp book```， 创建一个app
@@ -162,7 +162,15 @@ urlpatterns = [
 ## 2.2 URL传递参数2：查询字符串？，GET请求
 
 此方法，视图函数无需写传递参数的变量。使用`request.GET.get('paras in url with ?')`
-  
+
+- 前端html中的input控件中的name值和value值 会显示再url中的？后面
+- django 的Urls.py分析传递过来的url后将参数分析出来
+- 再视图函数中通过get方法获得参数
+- 控件使用：[30days_frontend:form](https://github.com/davidkorea/30days_frontend/blob/master/form.md)
+
+
+
+- django的 
 - views
   ```python
   def author_details(request):                        # 无需传递参数变量
