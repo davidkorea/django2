@@ -367,13 +367,15 @@ path('book/', include([
         re_path(r"^list/(?P<year>\d{4})/(?P<month>\d{2})/$", views.article_year_month)
     ]
     ```
-    - `r""`, raw text, 用户正则表达式
-    - `^`开始， `$`结尾
+    - `r""`, raw text, 原生字符串，无需在使用转移字符，用于正则表达式
+    - 正则表达式 以`^`开始， `$`结尾
     - `re_path(r"^$", views.article)`, 开始和结尾之前为空，匹配到article函数
     - `re_path(r"^list/$", views.article_list)`，开始和结尾之前只包含‘list/’，匹配article_list
-    - `(?P<paras>)`，用于正则表达式中的变量
-    - `(?P<year>\d{4})`，变量year，四位正数，`(?P<month>\d{2})`，变量montj，两位整数
+    - `(?P<paras>)`，正则表达式中的变量需要使用圆括号()，如果变量有名字，则需要在括号内部使用问好和大写字母P，`(?P<参数名字>)`，该参数名字也需要在视图函数中指定
+    - `(?P<year>\d{4})`，变量year，四位正数，`(?P<month>\d{2})`，变量month，两位整数
     - `r"^list/(?P<year>\d{4})/(?P<month>\d{2})/$"`，匹配list/oooo/oo 的网址，o为整数
+    
+**除非必须要使用正则表达式使用re_path()，否则path就可以了，否则今天写完正则后，明天看不明白什么意思**
 
 ![](https://i.loli.net/2019/06/07/5cfa81a7b1e8649572.png)
 
