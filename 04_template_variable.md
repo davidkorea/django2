@@ -159,6 +159,9 @@ def login(request):
 // template/index.html
 <li><a href="{% url 'login' %}?next=/ ">login</a></li>
 ```
+- GET请求的参数，需要拼接字符串，不能直接按照上面的写法直接写到{% url %}里面
+
+![Feb-29-2020 13-59-56](https://user-images.githubusercontent.com/26485327/75601979-d11f4500-5afb-11ea-8bf8-59c3dcfc2384.gif)
 
 
 
