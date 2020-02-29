@@ -10,8 +10,19 @@
 # 2. 模板继承 extends
 
 - 将公用的代码部分提出出来，作为 父级元素，如base.html
+  - 在不同子页面需要添加各自不同代码的地方留出接口，并使用{% block blockName %}
+    ```
+    {% block content %}
+    {% endblock %}
+    ```
 - 将每个页面自己的内容，作为 子元素，通过扩展extends子元素来将父模板引入
   - `{% extends 'base.html' %}`，必须在子页面的最上面添加该行代码，使其最为子页面的第一行代码
+  - 第一行插入上面代码后，下面则使用在父页面留出的接口出使用{% block blockName %}
+    ```
+    {% block content %}
+      my app contents...
+    {% endblock %}
+    ```
 
 ## 模板继承 DEMO
 - app
@@ -25,6 +36,9 @@
     - front.html
     - book.html
     - movie.html
+
+![Feb-29-2020 19-49-00](https://user-images.githubusercontent.com/26485327/75606898-91248600-5b2c-11ea-98a9-444f292bf810.gif)
+
 
 ### 1. 全局设定
 
