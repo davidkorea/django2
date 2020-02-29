@@ -4,8 +4,7 @@
 2. for
 3. with
 4. url
-
-
+5. spaceless
 
 
 # 1. {% with %}{% endwith %}
@@ -176,6 +175,57 @@ def login(request):
 - GET请求的参数，需要拼接字符串，不能直接按照上面的写法直接写到{% url %}里面
 
 ![Feb-29-2020 13-59-56](https://user-images.githubusercontent.com/26485327/75601979-d11f4500-5afb-11ea-8bf8-59c3dcfc2384.gif)
+
+
+# 3. spaceless
+分层次的html标签代码，选然后会生成一行没有空白字符的代码
+```python
+{% spaceless %}
+  <div>
+      <p>hello</p>
+  </div>
+{% endspaceless %}
+```
+
+```html
+<div><p>hello</p></div>
+```
+
+
+# 4. autoescape 自动转义 {% autoescape off %}
+- 默认开启了自动转义，将context中的内容，原封不动的显示在html文档中
+- 可以在模板中关闭自动转义`{% autoescape off %}`
+
+```python
+def index(request):
+    context = {
+        "link":"<a href='www.davidkorea.com'></a>"
+    }
+    return render(request, 'index.html', context=context)
+```
+```html
+// templates/index.html
+<p>{{ link }}</p>   // 完全被转义后，现实raw文本
+```
+
+<img width="700" src="https://user-images.githubusercontent.com/26485327/75602585-b4860b80-5b01-11ea-9ff1-f89952d1e785.png">
+
+关闭自动转义
+
+```html
+// templates/index.html
+
+{% autoescape off %}
+    <p>{{ link }}</p>
+{% endautoescape %}
+```
+<img width="700" src="https://user-images.githubusercontent.com/26485327/75602631-1e9eb080-5b02-11ea-9642-abc5d8d7ad28.png">
+
+
+
+
+
+
 
 
 
