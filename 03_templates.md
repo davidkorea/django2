@@ -91,4 +91,53 @@ def index(request):
 ```
 
 ## 3.2 {% for i in list %}{% endfor %}
+### 1. 遍历列表
+```python
+def index(request):
+    context = {
+        'books':['三国','水浒','红楼']
+    }
+    return render(request,'index.html', context=context)
+```
+```python
+<ul>
+    {% for book in books reversed %}
+        <li>{{ book }}</li>
+    {% endfor %}
+</ul>
+```
+- reversed 倒序
+
+### 2. 遍历字典
+```python
+context = {
+    'persons':{
+        "username":'david',
+        "age":'22'
+    }
+}
+```
+```python
+<div>
+    {% for key,value in persons.items %}
+        <div>{{key}} : {{value}}</div>
+    {% endfor %}
+</div>
+```
+### 3. forloop.counter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
