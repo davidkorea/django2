@@ -126,54 +126,77 @@ context = {
 ```
 ### 3. forloop.counter
 
+```python
+context = {
+    'books':[{
+        "name":"三国演义",
+        "author":"罗贯中",
+        "price":120
+    },{
+        "name": "水浒传",
+        "author": "施耐庵",
+        "price": 109
+    },{
+        "name": "西游记",
+        "author": "吴承恩",
+        "price": 99
+    },{
+        "name": "红楼梦",
+        "author": "曹雪芹",
+        "price": 199
+    }],
 ```
-    context = {
-        'books':[{
-            "name":"三国演义",
-            "author":"罗贯中",
-            "price":120
-        },{
-            "name": "水浒传",
-            "author": "施耐庵",
-            "price": 109
-        },{
-            "name": "西游记",
-            "author": "吴承恩",
-            "price": 99
-        },{
-            "name": "红楼梦",
-            "author": "曹雪芹",
-            "price": 199
-        }],
-```
-```html
- <table>
-        <thead>
+```python
+<table>
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>Name</td>
+            <td>Author</td>
+            <td>Price</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
             <tr>
-                <td>Item</td>
-                <td>Name</td>
-                <td>Author</td>
-                <td>Price</td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.price}}</td>
             </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{book.name}}</td>
-                    <td>{{book.author}}</td>
-                    <td>{{book.price}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 ```
+<img width="200" src="https://user-images.githubusercontent.com/26485327/75598279-8f7ba380-5ad5-11ea-89e6-f6d9f77a6ede.png">
+
+- `loop.counter`, 1 -> n
+- `loop.counter0`, 0 -> n
+- `loop.revcounter`, n -> 1
+- `loop.revcounter0`, n -> 0
+- `loop.first`, 第一次遍历 
+- `loop.last`, 最后一次遍历
 
 
-
-
-
-
+```python
+<tbody>
+    {% for book in books %}
+        {% if forloop.first %}
+            <tr style="background-color:aliceblue">
+        {% elif forloop.last %}
+            <tr style="background-color:darkgray;color:white">
+        {% else %}
+            <tr>
+        {% endif %}   // 仅开始标签根据条件变化，闭合标签在最后保持不变
+                <td>{{ forloop.counter }}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.price}}</td>
+            </tr>     // 闭合标签不变
+    {% endfor %}
+</tbody>
+```
+<img width="200" src="https://user-images.githubusercontent.com/26485327/75598531-40367280-5ad7-11ea-9686-69108374162c.png">
 
 
 
