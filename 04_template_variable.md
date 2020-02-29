@@ -5,7 +5,7 @@
 3. with
 4. url
 5. spaceless
-
+6. verbatim  逐字的(地)
 
 # 1. {% with %}{% endwith %}
 定义的变量只能在with语块里面使用
@@ -193,7 +193,7 @@ def login(request):
 
 
 # 4. autoescape 自动转义 {% autoescape off %}
-- 默认开启了自动转义，将context中的内容，原封不动的显示在html文档中
+- 默认开启了自动转义，将context中的内容，原封不动的显示在html文档中，以防止XSS漏洞
 - 可以在模板中关闭自动转义`{% autoescape off %}`
 
 ```python
@@ -211,7 +211,11 @@ def index(request):
 <img width="700" src="https://user-images.githubusercontent.com/26485327/75602585-b4860b80-5b01-11ea-9ff1-f89952d1e785.png">
 
 关闭自动转义
-
+```python
+context = {
+      "link":"<a href='www.davidkorea.com'>website</a>"
+  }
+```
 ```html
 // templates/index.html
 
@@ -221,6 +225,12 @@ def index(request):
 ```
 <img width="700" src="https://user-images.githubusercontent.com/26485327/75602631-1e9eb080-5b02-11ea-9642-abc5d8d7ad28.png">
 
+
+# 5. verbatim {% verbatim %}
+
+当前端使用其他模板时，有些关键字会冲突，比如其他模板也是用{{}}来解析变量，需要让django不对其解析
+
+`{% verbatim %}`中的`{{ }}` 和 `{%  %}`不会被django当做变量解析，而是让其他框架去解析
 
 
 
