@@ -36,7 +36,7 @@
   - 那么在子页面中使用extends扩展父页面时，父页面也可以使用上面视图函数中定义的变量的值
 
 
-## 模板继承 DEMO
+# 3. 模板继承 DEMO
 - app
   - front app
   - book app
@@ -52,9 +52,9 @@
 ![Feb-29-2020 19-49-00](https://user-images.githubusercontent.com/26485327/75606898-91248600-5b2c-11ea-98a9-444f292bf810.gif)
 
 
-### 1. 全局设定
+## 3.1 全局设定
 
-#### urls
+### 1. urls
 由于多app，每个app的url具体细节由各自app内部的urls负责，全局urls使用include，并指定实例命名空间namespace
 ```python
 from django.urls import path, include
@@ -66,10 +66,10 @@ urlpatterns = [
 ]
 ```
 
-### 2. app设定
+## 3.2 app设定
 
-#### 2.1 app - front
-- urls
+### 3.2.1 app - front
+#### - urls
 ```python
 from django.urls import path
 from . import views
@@ -81,7 +81,7 @@ urlpatterns = [
 ]
 ```
 
-- views
+#### - views
 ```python
 from django.shortcuts import render
 
@@ -90,8 +90,8 @@ def index(request):
     return render(request, 'front.html', context=context)
 
 ```
-#### 2.2 app - book
-- urls
+### 3.2.2 app - book
+#### - urls
 ```python
 from django.urls import path
 from . import views
@@ -103,7 +103,7 @@ urlpatterns = [
 ]
 ```
 
-- views
+#### - views
 ```python
 from django.shortcuts import render
 
@@ -112,17 +112,17 @@ def index(request):
     return render(request, 'book.html', context=context)
 
 ```
-#### 2.2 app - movie
+### 3.3.3 app - movie
 
 same as above
 
-### 3. templates
+## 3.3 templates
 
 使用模板继承的方式
 1. 将相同的代码部分提取出来，作为父模板
 3. 根据不同app，使用各自不同的代码来扩展extends父模板
 
-- base
+#### - base
 ```html
  <div class="nav">
         <ul>              // 由于每个app都有使用index命名的url，所以必须通过namaespace进行区分
@@ -143,7 +143,7 @@ same as above
     </div>
 ```
 
-- front
+#### - front
 ```python
 {% extends 'base.html' %}
 
@@ -154,7 +154,7 @@ same as above
 {% endblock %}
 ```
 
-- book
+#### - book
 ```python
 {% extends 'base.html' %}
 
@@ -165,7 +165,7 @@ same as above
 {% endblock %}
 ```
 
-- movie
+#### - movie
 
 same as above
 
