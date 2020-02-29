@@ -9,5 +9,15 @@
 2. 在`templatetags`下面创建python文件，用来放置自定义过过滤器
 3. 在上面啊的python文件中，定义过滤器函数，该函数的第一个参数`value`是被过滤的那个值。需要时还可以在定义一个参数，但最多不能超过2各参数，除了value之外最多再创建一个参数
 4. 写完了过滤器函数后，需要使用`django.template.Library.filter`注册
+    - `django.template.Library.filter`还可以当做装饰器@来使用
+      ```python
+      from django import template
+      
+      register = template.Library()
+      
+      @register.filter('my_filter')     // 此处不指定名称，则函数名即为过滤器名
+      def great_filter(value, word)
+        return value + word
+      ```
 5. 还要把过滤器所在的app注册到全局settings.py的`INSTALLED_APPS`里面
 6. 在模板html文件最开始使用load标签加载过滤器所在的python文件
