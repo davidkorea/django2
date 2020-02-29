@@ -64,7 +64,7 @@ def movie(request):
     return  HttpResponse('movie page')
 ```
 
-```python
+```html
 // templates/index.html
 
 <!DOCTYPE html>
@@ -113,6 +113,7 @@ def movie(request):
 - `<a href="{% url 'index' %}">index</a>`
 - `{% url 'index' %}`，urlname 不是用用括号
 
+![Feb-29-2020 12-22-29](https://user-images.githubusercontent.com/26485327/75600743-31a78580-5aee-11ea-9bf8-3852b9934cba.gif)
 
 
 
