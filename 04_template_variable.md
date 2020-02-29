@@ -136,9 +136,23 @@ def book_details(request, book_id):
 ```html
 // templates/index.html
 
-<li><a href="{% url 'book_details' book_id=1 %}">book List</a></li>
+<li><a href="{% url 'book_details' book_id='1' %}">book List</a></li>
 ```
-- url名后面，空格，直接写参数名和参数值`book_id=1`
+- url名后面，空格，直接写参数名和参数值`book_id='1'`
+- 传递多参数时，url中需要使用空格隔开`{% url 'book_details' book_id='1' category_id='12' %}`，不能使用逗号
+```python
+urlpatterns = [
+    path('book/<book_id>/<category_id>/', views.book_details, name="book_details"),]
+
+def book_details(request, book_id, category_id):
+    text = 'the book id is: %s, category is: %s' % (book_id, category_id)
+    return HttpResponse(text)
+    
+<li><a href="{% url 'book_details' book_id='1' category_id='12' %}">book List</a></li>
+```
+
+![Feb-29-2020 14-15-29](https://user-images.githubusercontent.com/26485327/75602197-f90fa800-5afd-11ea-9e72-22dfab1f0529.gif)
+
 
 ### 2. GET？获取变量
 ```python
