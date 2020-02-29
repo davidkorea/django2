@@ -90,7 +90,7 @@ def index(request):
 </div>
 ```
 
-## 3.2 {% for i in list %}{% endfor %}
+## 3.2 {% for . in ... %} {% empty %} {% endfor %}
 ### 1. 遍历列表
 ```python
 def index(request):
@@ -199,8 +199,22 @@ context = {
 <img width="200" src="https://user-images.githubusercontent.com/26485327/75598531-40367280-5ad7-11ea-9686-69108374162c.png">
 
 
+### 4. {% empty %}
 
-
-
+如果循环列表为空，里面没有内容，则执行{% empty %}里面的内容。常用于评论区没有留言的的时候
+```
+context = {
+  "comments":[],
+}
+```
+```python
+<div>
+    {% for c in comments %}
+        <p>c</p>
+    {% empty %}
+        <p>No comment yet.</p>
+    {% endfor %}
+</div>
+```
 
 
