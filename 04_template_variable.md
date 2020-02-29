@@ -3,7 +3,7 @@
 1. if
 2. for
 3. with
-
+4. url
 
 
 
@@ -116,12 +116,49 @@ def movie(request):
 ![Feb-29-2020 12-22-29](https://user-images.githubusercontent.com/26485327/75600743-31a78580-5aee-11ea-9bf8-3852b9934cba.gif)
 
 
+## 2.1 url传递参数
+### 1. 声明变量
+{% url 'urlName' id='1' %}
 
+```python
+// urls.py
+urlpatterns = [
+    path('', views.index, name="index"),
+    path('book/', views.book, name="book"),
+    path('book/<book_id>', views.book_details, name="book_details"),]
+```
+```python
+// views.py
+def book_details(request, book_id):
+    text = 'the book id is: %s' %book_id
+    return HttpResponse(text)
+```
+```html
+// templates/index.html
 
+<li><a href="{% url 'book_details' book_id=1 %}">book List</a></li>
+```
+- url名后面，空格，直接写参数名和参数值`book_id=1`
 
+### 2. GET？获取变量
+```python
+// urls.py
+urlpatterns = [
+    path('login/', views.login, name='login')
+]
+```
 
-
-
+```python
+//views.py
+def login(request):
+    next = request.GET.get('next')      // 通过GET获取？参数
+    text = 'the next page is %s' %next
+    return HttpResponse(text)
+```
+```html
+// template/index.html
+<li><a href="{% url 'login' %}?next=/ ">login</a></li>
+```
 
 
 
