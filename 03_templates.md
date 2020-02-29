@@ -126,8 +126,48 @@ context = {
 ```
 ### 3. forloop.counter
 
-
-
+```
+    context = {
+        'books':[{
+            "name":"三国演义",
+            "author":"罗贯中",
+            "price":120
+        },{
+            "name": "水浒传",
+            "author": "施耐庵",
+            "price": 109
+        },{
+            "name": "西游记",
+            "author": "吴承恩",
+            "price": 99
+        },{
+            "name": "红楼梦",
+            "author": "曹雪芹",
+            "price": 199
+        }],
+```
+```html
+ <table>
+        <thead>
+            <tr>
+                <td>Item</td>
+                <td>Name</td>
+                <td>Author</td>
+                <td>Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+```
 
 
 
