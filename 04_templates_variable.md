@@ -33,8 +33,13 @@ context = {
 
 # 2. {% url %}
 模板中使用`{% url 'urlName' %}`，来调用urls.py中命名的url路由
+1. `{% url 'urlName' %}`
+2. `{% url 'namespace:urlName' %}`，使用实例命名空间
+3. `{% url 'urlName' param1='1' param='2' %}`
+4. `{% url 'urlName' %}?param1=1&param2=2`
 
-
+## 2.1 {% url 'urlName' %} 
+无app_name，无namespace
 ```python
 // urls.py
 from django.urls import path
@@ -114,8 +119,56 @@ def movie(request):
 
 ![Feb-29-2020 12-22-29](https://user-images.githubusercontent.com/26485327/75600743-31a78580-5aee-11ea-9bf8-3852b9934cba.gif)
 
+## 2.2 {% url 'namespace:urlName' %}
 
-## 2.1 url传递参数
+有app_name，有namespace
+
+当项目中有多个app时，需要在全局urls中为每个app配置实例命名空间namespace，而且还要在每个app下面的urls下面配置应用米命名空间app_name
+
+- 全局urls.py
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('front.urls', namespace="front")),   // include函数内部设置namespace
+    path('book/', include('book.urls', namespace="book")),
+    path('movie/', include('movie.urls', namespace="movie")),
+]
+```
+- app:book urls.py
+```python
+from django.urls import path
+from . import views
+
+app_name = 'book'               // 使用实例命名空间namespace时，必须搭配应用命名空间一起使用
+
+urlpatterns = [
+    path('', views.index, name='index'),    // 为url命名
+]
+```
+- app:movie urls.py
+
+```python
+from django.urls import path
+from . import views
+
+app_name = 'movie'
+
+urlpatterns = [
+    path('', views.index, name="index")       // 不同app之间，可以给url使用同样名称来命名
+]                                             // 因为可以使用namespace:urlname的方式来区分
+```
+- 模板html
+  - **{% url 'namespace:urlName' %}**
+```html
+<ul>
+    <li><a href="{% url 'front:index' %}">front</a></li>
+    <li><a href="{% url 'book:index' %}">book</a></li>
+    <li><a href="{% url 'movie:index' %}">movie</a></li>
+</ul>
+```
+
+## 2.3 url传递参数
 ### 1. 声明变量
 {% url 'urlName' id='1' %}
 
