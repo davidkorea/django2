@@ -4,7 +4,7 @@
 DTL， django template language，是django自带的模板语言，是一种带有特殊语法的html文件，可以传递参数进入，实现数据动态化，完成编译后生成一个普通html文件发送给客户端
 
 
-## 1. 创建模板专用目录
+# 1. 创建模板专用目录
 ### 1.1 全局模板路径
 - 在根目录，和爱她app平行的目录中，创建`templates`，创建目录即可，无需床架安Python Package
 - 添加该模板文件夹3全局设定中settings.py
@@ -49,7 +49,7 @@ TEMPLATES = [
 
 
 
-## 2. 视图函数render后返回
+# 2. 视图函数render后返回
 ```python
 from django.shortcuts import render
 
@@ -60,8 +60,35 @@ def index(request):
 - render 就是将index.html先render_to_string，在用HttpResponse进行封装
 
 
+# 3. 模板变量
+- 在模板中使用变量，需要使用两个花括号 `{{  }}`
+- 访问对象（类class）的属性，可以通过`变量.属性名`的方式获得属性值
+- 访问字典的key对应的value，使用`字典.key名`的方式获得对应key的属性值value，不能通过dict[key]的方式，因为不能使用方括号`[ ]`
+  - 不能在字典中，把python dict的关键字用作键名，如keys，values，items，否则会出现问题
+  - 否则，当访问`dict.keys`时，返回的将不是字典的所有键，而是这个
+- 访问数组或元素，也是通过点的方式获得`list.0`,，不能通过方括号获得`list[0]`，这与原生python不一样
 
+## 3.1 {% if %} {% elif %} {% else %} {% endif %}
 
+```python
+// vires.py
+from django.shortcuts import render
 
+def index(request):
+    context = {
+        'books':['三国','水浒','红楼']
+    }
+    return render(request,'index.html', context=context)
+```
+```xml
+<div>
+    {% if "三国" in books %}
+        <p>三国</p>
+    {% else %}
+        <p>no</p>
+    {% endif %}
+</div>
+```
 
+## 3.2 {% for i in list %}{% endfor %}
 
