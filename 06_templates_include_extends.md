@@ -23,6 +23,18 @@
       my app contents...
     {% endblock %}
     ```
+- views中的视图函数中`render(request, apppage.html, context=context)`，context的变量，可以直接在父模板中使用
+  - 比如父模板base.html中，有一个变量`{{ username }}`
+  - views里面的函数，在context中指定该变量usernaame
+    ```python
+    def index(request):
+      context = {
+        "username":"david"
+      }
+      return render(request, 'index.html', context=context)
+    ```
+  - 那么在子页面中使用extends扩展父页面时，父页面也可以使用上面视图函数中定义的变量的值
+
 
 ## 模板继承 DEMO
 - app
