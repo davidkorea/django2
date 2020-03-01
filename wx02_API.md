@@ -139,7 +139,7 @@ wx.downloadFile({
 ### 1.2.1 setStorage & getStorage
 > 异步请求
 ```html
-<view bindtap="testNetwork">tap me to test network</view>
+<view bindtap="testStoreage">tap me to test storeage</view>
 ```
 ```javascript
 Page({
