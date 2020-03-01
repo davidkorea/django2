@@ -3,7 +3,7 @@
 
 静态文件如 css， js， jpg等文件，需要专门进行管理
 
-## 1. 检查全局设定
+# 1. 检查全局设定
 1. 全局settings.py **INSTALLED_APPS**，`django.contrib.staticfiles`，创建项目后已自动添加
 ```python
 INSTALLED_APPS = [
@@ -15,7 +15,7 @@ INSTALLED_APPS = [
 STATIC_URL = '/static/'
 ```
 - 设置请求静态文件时的路径：hostname/static.1.png
-## 2. 静态文件路径查找
+# 2. 静态文件路径查找
 
 ### 2.1 [不常用]静态文件app内路径查找
   - 将app注册到全局settings.py的INSTALLED_APPS中
@@ -80,10 +80,30 @@ body {
 </html>
 ```
 
+# 3. 简化{% load static %}
 
+- 由于static标签不是像if和for一样的django内置标签，因此每个模板页面的首行都要有{% load static %}，这样太麻烦了
+- 手动吧static标签设置为内置标签，这样以后再使用，直接`{% static 'static file' %}`即可，而无需在首行添加上面的标签
+- 全局settings.py中的**TEMPLATES** 的OPTIONS中添加`'builtins': ['django.templatetags.static']`
+```diff
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
++           'builtins': ['django.templatetags.static'],
+        },
+    },
+]
 
-
-
+```
 
 
 
