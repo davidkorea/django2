@@ -174,7 +174,7 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 
 不同app具有相同的url名name，会出现页面路由错误，通过在各自app内的urls.py中为每个app设置一个`app_name`来解决
 
-因为前端和后台都有index和login两个页面。如果各自的url都取名为name=index和name=login，那么`redirect(reverse('login'))`时，django会一脸懵逼，不能正确路由
+因为前端和后台都有index和login两个页面。如果各自的url都取名为name=index和name=index，那么`redirect(reverse('login'))`时，django会一脸懵逼，不能正确路由
 
 **在app的urls.py中使用app_name**, `redirect(reverse('app_name:login'))`来重定向。
 
@@ -222,9 +222,9 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 
 实例命名空间就是，如上，有几个url的映射，就有几个实例
 
-还是上面的场景，url中传递username参数，则返回从cms index页面，否则重定向只cms login页面，出现混乱
-- 无username，访问cms1/，重定向只cms1/login
-- 无username，访问cms2/，依然，重定向只cms1/login
+还是上面的场景，url中传递username参数，则返回cms index页面，否则重定向至cms login页面，出现混乱
+- 无username，访问cms1/，重定向至cms1/login
+- 无username，访问cms2/，依然，重定向至cms1/login
 
 因此需要对不同实例，在全局urls.py中创建一个唯一的实例命名空间。这样在视图函数中重定向时，可以根据实例命名空间进行重定向
 
@@ -292,7 +292,8 @@ if modify url login -> signin, the urls.py and views.py redirect in the local ap
 
 # 1. include()函数详解
 
-> 上面说到， 如果使用实例命名空间namespace，则必须设定应用命名空间app_name，二者搭配使用。处理分别创建这两个命名空间，还可以在全局urls.py中一并舍弟过
+> 上面说到， 如果使用实例命名空间namespace，则必须设定应用命名空间app_name，二者搭配使用。处理分别创建这两个命名空间，还可以在全局urls.py中一并设定
+
 > - **下面两种方式，不如上面的方法常用，因为不够简洁，不好理解。了解下面的2种用法就可以。我不用，但我懂**
 
 ## 1.1 全局url中设置app命名空间
@@ -400,7 +401,7 @@ url = reverse('login', kwargs={"username":"david", "id":1})
 
 ```python
 def login(request, username, id)
-  url = reverse('login') + '?username= username&id=id/'
+  url = reverse('login') + '?username=username&id=id/'
 ```
 
 
