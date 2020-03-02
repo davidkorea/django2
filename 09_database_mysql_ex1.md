@@ -6,7 +6,11 @@
     - static, add css / images when views function is created
     - disable crsf middle
     - urls, `from front import views`
-3. Overview
+    - DATABASE mysql
+3. Database mysql
+    - create table 'book' and add fields to table
+    
+4. Overview
 
 | url | views | method | DB, cursor.execute() |
 |-|-|-|-|
@@ -15,14 +19,15 @@
 | book_details/\<int:book_id\>/ | `book_details(book_id)` | **GET** | `select * from book where id=$book_id` |
 | book_delete/\<int:book_id\>/ | `book_delete(book_id)` | **GET** | `delete from book where id=$book_id` |
  
-4. templates
+5. templates
     - base.html, header nav-bar
     - index.html
     - add_book.html
     - book_detail.html
     - book_delete.html
     
-5. 按照功能分门别类设置 视图函数 和 模板tml
+    
+按照功能分门别类设置 视图函数 和 模板html
     
 
 # 1. 首页
