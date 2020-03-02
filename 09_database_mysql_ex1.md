@@ -8,12 +8,12 @@
     - urls, `from front import views`
 3. Overview
 
-| url | views function | template, extends base.html | DB|
+| url | views function | method | DB, cursor.execute() |
 |-|-|-|-|
-| '' | index() | index.html | cursor.execute("select * from book") |
-| add_book/ | add_book(name, author) | add_book.html | cursor.execute("insert into book(id,name,author)") |
-| book_details/<int:book_id>/ | book_details(book_id) | book_details.html | cursor.execute("select * from book where id=book_id") |
-| book_delete/<int:book_id>/ | book_delete(book_id) | null | cursor.execute("delete from book where id=book_id") |
+| '' | index() | GET | cursor.execute("select * from book") |
+| add_book/ | add_book() | POST, Form(name, author) | `"insert into book(id,name,author)"` |
+| book_details/<int:book_id>/ | book_details(book_id) | GET | `"select * from book where id=book_id"` |
+| book_delete/<int:book_id>/ | book_delete(book_id) | GET | `"delete from book where id=book_id"` |
     
     
     
