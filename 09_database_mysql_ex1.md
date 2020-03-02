@@ -109,9 +109,9 @@ def index(request):
 </div>
 {% endblock %}
 ```
-- `<form action="">`，action为空，表示将表单的input键值对`name:value`提交到当前url地址
+- `<form action="">`，action为空，表示将表单的input键值对`name:value`提交到当前网址
+- 表单中的input type=submit，自动将表带内部的input内容提交到action中的网址
 - `autocomplete="off"`，取消输入框历史记录下拉框
-
 
 ### 2.2 视图函数
 
@@ -127,15 +127,125 @@ def add_book(request):
         return redirect(reverse('index'))
 ```
 
-# 3. 详情界面
+# 3. 详情页面
+
+
+### 3.1 模板
+- index.html
+    -  `<a href="{% url 'book_details' book_id=item.0 %}">`，超链接中将当先数目的数据库序号item.0传递给视图函数
+```html
+{% for item in db %}
+ <div class="btns">
+    <a href="{% url 'book_details' book_id=item.0 %}">
+        <!--  标签里面使用变量，直接调用即可，无需在使用花括号，否则报错  -->
+        <div class="show">Show</div>
+    </a>
+    <a href="{% url 'book_delete' book_id=item.0 %}">
+        <div id="{{ item.0 }}" class="delete">Delete</div>
+    </a>
+</div>
+{% endfor %}
+```
+
+- book_details.html
+```html
+{% extends 'base.html' %} {% block content %}
+<div>
+    book details
+    <div style="margin-top:10px">
+            <div>name: {{book.1}}</div>
+            <div>name: {{book.2}}</div>
+    </div>
+</div>
+{% endblock %}
+```
+
+
+### 3.2 视图函数
+
+```python
+def book_details(request, book_id):
+    cursor = get_cursor()
+    cursor.execute("select * from book where id='%s'" %book_id)
+    book = cursor.fetchone()
+    return render(request, 'book_details.html',context={'book':book})
+```
+通过首页按钮的<a>标签，搭配`{% url 'book_detail' book_id=item.0 %}`，将当前数目在数据库中的序号传回来，以用来在数据库中通过`where id=book_id`来检索数据
+
+# 4. 删除数目
+
+### 4.1 模板
+由于不需要显示页面，因此无该功能对应的html子页面。但是在主页index.html需要配置。
+
+
+### 4.2 视图函数
+
+#### 1. <a>标签，搭配`{% url 'book_delete' book_id=item.0 %}`
+点击后直接删除，返回首页
+    
+- index.html
+```html
+{% for item in db %}
+ <div class="btns">
+    <a href="{% url 'book_delete' book_id=item.0 %}">
+        <div id="{{ item.0 }}" class="delete">Delete</div>
+    </a>
+</div>
+{% endfor %}
+```
+
+```python
+def book_delete(request, book_id):
+    cursor = get_cursor()
+    cursor.execute("delete from book where id='%s'" % book_id)
+    return redirect(reverse('index'))
+```
+
+
+#### 2. jQuery AJAX
+点击后，先弹出确认删除提示框，同意后删除数据，在弹出删除成功提示框.
+
+- index.html
+    - <a>标签的href留空，按钮的点击事件交给js操作
+    - 给删除按钮添加id，该id即为该数目在数据库中的索引序号，以用于方便获取该元素
+    
+```html
+{% for item in db %}
+ <div class="btns">
+    <a href="">
+        <div id="{{ item.0 }}" class="delete">Delete</div>
+    </a>
+</div>
+
+<script>
+    $(function() {
+        $('#{{ item.0 }}').click(function() {
+            var deleteFlag = confirm('Delete {{ item.1 }} ?')
+            if (deleteFlag) {
+                $.ajax({
+                    url: "{% url 'book_delete' book_id=item.0 %}",
+                    success: function(resp) {
+                        alert(resp)
+                    }
+                })
+            }
+        })
+    })
+</script>
+{% endfor %}
+```
+
+```python
+def book_delete(request, book_id):
+    cursor = get_cursor()
+    cursor.execute("delete from book where id='%s'" % book_id)
+    return HttpResponse('Deleted No. %s ok.' % book_id)
+```
 
 
 
 
-
-
-
-
+-----
 
 
 
