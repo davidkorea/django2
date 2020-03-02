@@ -10,7 +10,7 @@
     - `__init__.py` import pymysql, `pymysql.install_as_MySQLdb()`
     - register app
     - templates, add html files when views function is created
-    - static, add css / images when views function is created
+    - static, add `'builtins': ['django.templatetags.static']` in `TEMPLATES`
     - disable crsf middle `# 'django.middleware.csrf.CsrfViewMiddleware'`
     - urls, `from front import views`
     - DATABASE mysql
