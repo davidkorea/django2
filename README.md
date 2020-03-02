@@ -17,7 +17,7 @@
 - [anaconda3初始安装设置terminal环境变量 #1](https://github.com/davidkorea/django2/issues/1#issue-571842494)
 - [python venv, virtualenv, virtualenvwrapper 虚拟环境比较 #2](https://github.com/davidkorea/django2/issues/2#issue-571906883)
 - [创建一个django项目 Pycharm配置编译环境interpreter #3](https://github.com/davidkorea/django2/issues/3#issue-571912084)
-
+- [django2/3 mysqlclient pymysql "Error loading MySQLdb module. Did you install mysqlclient?" #5](https://github.com/davidkorea/django2/issues/5#issue-573657976)
 -----
 
 
