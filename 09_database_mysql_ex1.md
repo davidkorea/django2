@@ -206,6 +206,8 @@ def book_delete(request, book_id):
     return redirect(reverse('index'))
 ```
 
+![Mar-02-2020 15-52-02](https://user-images.githubusercontent.com/26485327/75655900-cbf9fb80-5c9d-11ea-8bc3-8612a8c5f0cf.gif)
+
 
 #### 2. jQuery AJAX
 点击后，先弹出确认删除提示框，同意后删除数据，在弹出删除成功提示框.
@@ -247,6 +249,7 @@ def book_delete(request, book_id):
     return HttpResponse('Deleted No. %s ok.' % book_id)
 ```
 
+![Mar-02-2020 16-00-00](https://user-images.githubusercontent.com/26485327/75656447-ebddef00-5c9e-11ea-8190-0d671ec9acc2.gif)
 
 
 
