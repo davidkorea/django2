@@ -5,12 +5,11 @@
 1. install mysql
 2. install navicat
 3. set mysql db in django
+4. install mysqlclient and pymysql, modify django source code -  [django2/3 mysqlclient pymysql "Error loading MySQLdb module. Did you install mysqlclient?" #5](https://github.com/davidkorea/django2/issues/5#issue-573657976)
 
-## ISSUE [django2/3 mysqlclient pymysql "Error loading MySQLdb module. Did you install mysqlclient?" #5](https://github.com/davidkorea/django2/issues/5#issue-573657976)
+# 1. set mysql db in django
 
-# set mysql db in django
-
-- settings.py
+- global settings.py
 ```python
 DATABASES = {
     'default': {
@@ -23,4 +22,14 @@ DATABASES = {
     }
 }
 ```
+
+在navicat中，创建数据库和表book
 <img width="950" src="https://user-images.githubusercontent.com/26485327/75625148-50913f00-5bf6-11ea-8d3f-ff1d45679840.png">
+
+
+
+
+
+
+
+
