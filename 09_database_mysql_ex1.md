@@ -1,4 +1,4 @@
-#### 前端如何传递参数给django
+### 前端如何传递参数给django
 #### 1. 方式1, 前端通过a标签，指明参数回传给后段啊
 - 前端
 ```html
@@ -34,11 +34,13 @@ def backend(request):
 - input的name在创建元素时，已经指定
 - value就是用户在输入框中填写的内容
 
-
+> [Jquery get Form Values](https://github.com/davidkorea/30days_frontend/blob/master/form.md#jquery-get-form-values)
 
 
 -----
 -----
+-----
+
 # 图书管理系统
 
 <img width="700" src="https://user-images.githubusercontent.com/26485327/75657846-0c5b7880-5ca2-11ea-9819-d9cc7c41c323.png">
