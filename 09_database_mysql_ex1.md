@@ -1,3 +1,36 @@
+1. start project and app(front)
+2. global settings
+    - `__init__.py` import pymysql, `pymysql.install_as_MySQLdb()`
+    - register app
+    - templates, add html files when views function is created
+    - static, add css / images when views function is created
+    - disable crsf middle
+    - urls, `from front import views`
+3. Overview
+
+| url | views function | template html | DB|
+|-|-|-|-|
+|''|index()|||
+|add_book// |add_book()|||
+|book_details//<int:book_id> |book_details()|||
+|book_delete//<int:book_id> |book_delete()|||
+    
+    
+    
+    
+3. app - front views.py functions
+    - `index()`, render `index.html`
+    - `add_book()`
+    - `book_details()`
+    - `book_delete()`
+    
+
+
+
+
+
+
+
 
 
 
