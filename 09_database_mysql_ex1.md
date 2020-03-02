@@ -1,8 +1,10 @@
 
 
 
-# Form提交crsf
-```
+# 1. Form
+
+## 1.1 crsf
+```html
 <form action="" method="POST">
   <input type="text" name="name">
   <input type="submit"m value="Submit">
@@ -22,3 +24,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 ```
+## 1.2 取消输入框历史记录提示
+`autocomplete="off"`
+
+```html
+<form action="" method="POST" autocomplete="off>
+  <input type="text" name="name">
+  <input type="submit"m value="Submit">
+</form>
+```
+
+
+
+
+
+
