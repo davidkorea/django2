@@ -12,6 +12,10 @@ def backend(request, param1):
     从前端传回的参数param1
     return
 ```
+- url
+```python
+path('backend/<int: param1>', views.backend, name="backend" )
+```
 前端通过超链接的href，绑定好参数，跳转至后端的特定url，该后端url对应了一个视图函数，而函数收到传回来的参数，可以进行处理
 
 #### 2. 方式2，form表单POST提交信息
