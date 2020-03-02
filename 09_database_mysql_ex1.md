@@ -1,5 +1,44 @@
+前端如何传递参数给django
+1.方式1, 前端通过a标签，指明参数回传给后段啊
+- 前端
+```html
+{% for item in items %}
+    <div><a href="{% url 'backend' param1=item.0 %}">`</a></div>
+{% endfor %}
+```
+- django
+```python
+def backend(request, param1):
+    从前端传回的参数param1
+    return
+```
+前端通过超链接的href，绑定好参数，跳转至后端的特定url，该后端url对应了一个视图函数，而函数收到传回来的参数，可以进行处理
+
+2. 方式2，form表单POST提交信息
+- django
+```python
+def backend(request):
+    age = request.POST.get('age')
+    gender = request.POST.get('gender')
+```
+- 前端
+```html
+<form action="{% url 'backend' %}" method="POST">
+    <input type="text" name="age">
+    <input type="text" name="gender">
+    
+    <input type="submit" value="submit">
+</form>
+```
+因为type=submit的按钮，默认会将form里面input的数据以`name:vaalue`的形式提交给action中的地址
+- input的name在创建元素时，已经指定
+- value就是用户在输入框中填写的内容
 
 
+
+
+-----
+-----
 # 图书管理系统
 
 <img width="700" src="https://user-images.githubusercontent.com/26485327/75657846-0c5b7880-5ca2-11ea-9819-d9cc7c41c323.png">
