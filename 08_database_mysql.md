@@ -6,6 +6,7 @@
 2. install navicat
 3. set mysql db in django
 
+## ISSUE [django2/3 mysqlclient pymysql "Error loading MySQLdb module. Did you install mysqlclient?" #5](https://github.com/davidkorea/django2/issues/5#issue-573657976)
 
 # set mysql db in django
 
