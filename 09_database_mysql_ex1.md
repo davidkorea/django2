@@ -1,9 +1,9 @@
 ### 前端如何传递参数给django
-#### 1. 方式1, 前端通过a标签，指明参数回传给后段啊
+#### 1. 方式1, 前端通过a标签，指明参数回传给后端
 - 前端
 ```html
 {% for item in items %}
-    <div><a href="{% url 'backend' param1=item.0 %}">`</a></div>
+    <div><a href="{% url 'backend' param1=item.0 %}"></a></div>
 {% endfor %}
 ```
 - django
