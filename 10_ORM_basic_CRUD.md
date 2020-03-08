@@ -67,7 +67,6 @@ Running migrations:
 
 # 2. ORM 增删改查
 
--
 
 
 
@@ -94,6 +93,9 @@ def index(request):
 <img width="300" src="https://user-images.githubusercontent.com/26485327/76155081-1e19a180-6122-11ea-8042-567f73a971e3.png">
 
 ## 2.2 查
+
+**所有的查操作，都是通过模型类上的`objects`属性来完成**，也可以自定义
+
 ### 2.2.1 根据主键查找
 ```python
 # book/models.py
