@@ -67,9 +67,6 @@ Running migrations:
 
 # 2. ORM 增删改查
 
-
-
-
 ## 2.1 增
 ```python
 # global urls.py
@@ -113,6 +110,7 @@ class Book(models.Model):
 # book/views.py
 def index():
     book = Book.objects.get(pk=1)
+ // books = Book.objects.all()    # 获取全部数据
     print(book)
 ```
 ```
