@@ -12,9 +12,9 @@ ORM 可以通过类的方式去操作数据库，因此**无需手动在数据�
 
 ## 使用ORM创建一个数据库
 
-1. 创建app，并添加值全局设置INSTALLED_APP中
-2. 在创建的app中会自动生成models.py文件，用于创建ORM类
-3. 将一个普通的python类变成一个可以映射数据到数据库的模型，需要继承django的models.Model父类
+#### 1. 创建app，并添加值全局设置INSTALLED_APP中
+#### 2. 在创建的app中会自动生成models.py文件，用于创建ORM类
+#### 3. 将一个普通的python类变成一个可以映射数据到数据库的模型，需要继承django的models.Model父类
 ```python
 from django.db import models
 
@@ -24,8 +24,18 @@ class Book(models.Model):
     author = models.CharField(max_length=200, null=False)
     price = models.FloatField(null=False, default=0)  # default 默认值为0
 ```
-4. `makemigrations` 生成迁移脚本文件
-5. `migrate` 将迁移脚本文件映射到数据库
+- 其实id这一行可以不用手动定义，django默认会生成一个id字段并且为自增长的主键
+```python
+class Publiosher(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    address =  models.CharField(max_length=100, null=False)
+```
+<img width="700" src="https://user-images.githubusercontent.com/26485327/76154935-cbd78100-611f-11ea-97cc-fa1cc98f9fe7.png">
+
+
+
+#### 4. `python manage.py makemigrations` 生成迁移脚本文件
+#### 5. `python manage.py migrate` 将迁移脚本文件映射到数据库
 ```shell
 (dj3) yong@MacBookPro project8_orm % python manage.py makemigrations
 Migrations for 'book':
@@ -56,9 +66,10 @@ Running migrations:
   Applying sessions.0001_initial... OK
 ```
 - 由于django在INSTALLED_APPS中内置安装的一些app，首次执行migrate时会一并运行这些app的model，一起映射到数据库
-- 查看mysql数据库，已经创建好了表，表的名称为book_book，如果不指定表的名字，默认为**app的名_类的名**
-
 <img width="693"  src="https://user-images.githubusercontent.com/26485327/76154858-62a33e00-611e-11ea-90fa-4a507f13551e.png">
+
+
+- 查看mysql数据库，已经创建好了表，表的名称为book_book，如果不指定表的名字，默认为**app的名_类的名**
 <img width="957"  src="https://user-images.githubusercontent.com/26485327/76154878-a72ed980-611e-11ea-8ed2-8203c85446f8.png">
 
 
