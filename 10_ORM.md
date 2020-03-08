@@ -55,9 +55,11 @@ Running migrations:
   Applying book.0001_initial... OK
   Applying sessions.0001_initial... OK
 ```
+- 由于django在INSTALLED_APPS中内置安装的一些app，首次执行migrate时会一并运行这些app的model，一起映射到数据库
+- 查看mysql数据库，已经创建好了表，表的名称为book_book，如果不指定表的名字，默认为**app的名_类的名**
 
-
-
+<img width="693"  src="https://user-images.githubusercontent.com/26485327/76154858-62a33e00-611e-11ea-90fa-4a507f13551e.png">
+<img width="957"  src="https://user-images.githubusercontent.com/26485327/76154878-a72ed980-611e-11ea-8ed2-8203c85446f8.png">
 
 
 
