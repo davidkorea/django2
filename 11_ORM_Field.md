@@ -12,21 +12,32 @@
   - 数据库中对应显示为1和0
   - 若允许boolean字段为空值，即像设置`BooleanField(null=True)`，则需要使用**NullBooleanField**来代替
   
-- CharField，可变长度字符串
+- CharField，可变长度字符串，varchar
   - 此类型必须要指定`max_length`参数，否则报错
   - 如果长度超过254个字符，这不建议使用CharField，而是使用**TextField**来存储长文本
 
+- EmailField，默认max_length=254的varchar，**可存储任意格式字符串，不检查邮件格式@**，主要用于django的ModelForm
+- FileField
+- ImageField
+- FloatField
+- IntegerField
+- UUIDField，可存储任意格式字符串，主要用于django的ModelForm表单验证
+- URLField，可存储任意格式字符串，主要用于django的ModelForm表单验证
+
+
+
+
 # 2. 时间相关模型属性
-##### 1. Time Basics
-##### 2. ORM time Field
+#####  1. Time Basics
+#####  2. ORM time Field
 - `models.DateTimeField`， 年月日时分秒
 - `models.DateField`， 年月日
 - `models.TimeField`， 时分秒
   
 
 ## 2.1 Time Basics
-1. Python Time Basics
-2. django Time Basics
+- 2.1.1 Python Time Basics
+- 2.1.2 Django Time Basics
 
 ### 2.1.1 Python Time Basics
 > - naive time, 不知道当前时间所处时区
