@@ -17,9 +17,12 @@
   - 如果长度超过254个字符，这不建议使用CharField，而是使用**TextField**来存储长文本
 
 # 2. 时间相关模型属性
-1. Time Basics
-2. ORM time Field
-
+##### 1. Time Basics
+##### 2. ORM time Field
+- `models.DateTimeField`， 年月日时分秒
+- `models.DateField`， 年月日
+- `models.TimeField`， 时分秒
+  
 
 ## 2.1 Time Basics
 1. Python Time Basics
