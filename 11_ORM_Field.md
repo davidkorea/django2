@@ -108,6 +108,7 @@ def localtime(value=None, timezone=None):
 
 ## 2.2 示例
 
+### 2.2.1 数据库
 ```python
 # book/models.py
 
@@ -155,7 +156,55 @@ def index(request):
 - 更新该条数据后，create时间没有变化，开启auto_now的update时间变化了
 
 
+### 2.2.2 页面显示
 
+```pythobn
+# book/views.py
+
+from django.shortcuts import render
+from .models import Article
+
+def index(request):
+    article = Article.objects.get(pk=1)
+    createTime = article.create_time
+    return render(request, 'index.html', context={'createTime': createTime})
+```
+
+```python
+# glocal settings.py
+
+TEMPLATES = [
+    {
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        ...
+    }]
+    
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
+
+USE_TZ = True
+```
+
+```html
+# templates/index.html
+
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  // {{ createTime | localtime }}
+    {{ createTime }}
+</body>
+</html>
+```
+<img width="338" src="https://user-images.githubusercontent.com/26485327/76157751-58963500-6148-11ea-8f1b-0174f60eee97.png">
+
+- 网页中要使用`{% load tz %}`来加载时间，貌似没有也行
+- 是否使用过滤器，效果一样，djamgo默认将aware time按照全局设定中的`TIME_ZONE = 'Asia/Shanghai'`来显示时间
   
 
 
