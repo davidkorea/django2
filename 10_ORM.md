@@ -10,7 +10,7 @@ ORM 可以通过类的方式去操作数据库，因此**无需手动在数据�
 - 列 -> 属性
 
 
-## 使用ORM创建一个数据库
+# 1. 使用ORM创建一个数据库
 
 #### 1. 创建app，并添加值全局设置INSTALLED_APP中
 #### 2. 在创建的app中会自动生成models.py文件，用于创建ORM类
@@ -23,7 +23,12 @@ class Book(models.Model):
     name = models.CharField(max_length=200, null=False)
     author = models.CharField(max_length=200, null=False)
     price = models.FloatField(null=False, default=0)  # default 默认值为0
+    
+    def __str__(self):
+    return "<Book: (id:{id}, name:{name}, author:{author}, price:{price})>".format(
+        id=self.id, name=self.name, author=self.author, price=self.price)
 ```
+- `def __str__(self):`**是python类自带的语法，当打印该类时，会按照这个方法的设置进行输入显示**
 - 其实id这一行可以不用手动定义，django默认会生成一个id字段并且为自增长的主键
 ```python
 class Publiosher(models.Model):
@@ -48,20 +53,7 @@ Operations to perform:
 Running migrations:
   Applying contenttypes.0001_initial... OK
   Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying auth.0009_alter_user_last_name_max_length... OK
-  Applying auth.0010_alter_group_name_max_length... OK
-  Applying auth.0011_update_proxy_permissions... OK
+  ...
   Applying book.0001_initial... OK
   Applying sessions.0001_initial... OK
 ```
@@ -73,7 +65,66 @@ Running migrations:
 <img width="957"  src="https://user-images.githubusercontent.com/26485327/76154878-a72ed980-611e-11ea-8ed2-8203c85446f8.png">
 
 
+# 2. ORM 增删改查
 
+## 2.1 增
+```python
+# global urls.py
+from book import views
 
+urlpatterns = [
+    path('', views.index, name='index')
+]
+```
 
+```python
+# book/views.py
+from django.http import HTTPResponse
+from .models import Book
+
+def index(request):
+    book = Book(name='react.js', author='david', price=129)
+    book.save()
+    return HTTPResponse('Add book ok!')
+```
+<img width="300" src="https://user-images.githubusercontent.com/26485327/76155081-1e19a180-6122-11ea-8042-567f73a971e3.png">
+
+## 2.2 查
+### 2.2.1 根据主键查找
+```pythin
+# book/models.py
+class Book(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, null=False)
+    author = models.CharField(max_length=200, null=False)
+    price = models.FloatField(null=False, default=0)  # default 默认值为0
+
+    def __str__(self):
+        return "<Book: (id:{id}, name:{name}, author:{author}, price:{price})>".format(
+            id=self.id, name=self.name, author=self.author, price=self.price)
+```
+```python
+# book/views.py
+def index():
+    book = Book.objects.get(pk=1)
+    print(book)
+    
+#  <Book: (id:1, name:react.js, author:david, price:129.0)>
+```
+- `objects`是默认的方法，之后也可以自定义方法
+- `pk`是primary key的意思
+
+### 2.2.2 根据其他条件查找
+```python
+# book/views.py
+
+def index(request):
+    books = Book.objects.filter(author='david')
+    print(books)
+```
+```
+<QuerySet [<Book: <Book: (id:1, name:react.js, author:david, price:129.0)>>, 
+            <Book: <Book: (id:2, name:django web, author:david, price:88.0)>>]>
+```
+- `objects.filter(key='value')`返回一个数组，即使只有一个满足查询 条件也是数组
 
