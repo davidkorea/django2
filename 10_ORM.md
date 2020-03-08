@@ -67,6 +67,10 @@ Running migrations:
 
 # 2. ORM 增删改查
 
+-
+
+
+
 ## 2.1 增
 ```python
 # global urls.py
@@ -91,7 +95,7 @@ def index(request):
 
 ## 2.2 查
 ### 2.2.1 根据主键查找
-```pythin
+```python
 # book/models.py
 class Book(models.Model):
     id = models.AutoField(primary_key=True)
@@ -108,8 +112,9 @@ class Book(models.Model):
 def index():
     book = Book.objects.get(pk=1)
     print(book)
-    
-#  <Book: (id:1, name:react.js, author:david, price:129.0)>
+```
+```
+<Book: (id:1, name:react.js, author:david, price:129.0)>
 ```
 - `objects`是默认的方法，之后也可以自定义方法
 - `pk`是primary key的意思
@@ -127,4 +132,47 @@ def index(request):
             <Book: <Book: (id:2, name:django web, author:david, price:88.0)>>]>
 ```
 - `objects.filter(key='value')`返回一个数组，即使只有一个满足查询 条件也是数组
+
+
+
+## 2.3 删
+
+1. 查
+2. 删
+
+```python
+book = Book.objects.get(pk=1)
+book.delete()
+```
+
+
+## 2.4 改
+
+1. 查
+2. 赋新值
+3. 保存
+
+```python
+book = Book.objects.get(pk=2)
+book.price = 55
+book.save()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
