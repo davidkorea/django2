@@ -103,6 +103,57 @@ def localtime(value=None, timezone=None):
 
 
 
+## 2.2 示例
+
+```python
+# book/models.py
+
+class Article(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, null=False)
+    removed = models.BooleanField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+```
+```python
+# book/views.py
+
+from .models import Article
+
+def index(request):
+    ariticle = Article(name='django web', removed=False)
+    ariticle.save()
+    return HttpResponse('ok')
+```
+<img width="672" src="https://user-images.githubusercontent.com/26485327/76157598-baa16b00-6145-11ea-993e-68b4190b860e.png">
+
+- `create_time = models.DateTimeField(auto_now_add=True)`
+  - auto_now_add 第一次创建是，自动添加UTC时间，因为全局设定中`USE_TZ=True`
+- `update_date = models.DateTimeField(auto_now=True)`
+  - 每次更新数据，此处自动添加最后一次更新数据的时间
+  
+  
+ ```python
+# book/views.py
+
+from .models import Article
+def index(request):
+    # ariticle = Article(name='django web', removed=False)
+    article = Article.objects.get(pk=1)
+    article.name = 'learn django'
+    article.save()
+    return HttpResponse('ok')
+``` 
+  
+  
+![Mar-08-2020 14-09-21](https://user-images.githubusercontent.com/26485327/76157648-71055000-6146-11ea-9ae2-29ede7185677.gif)
+<img width="594" src="https://user-images.githubusercontent.com/26485327/76157660-909c7880-6146-11ea-8615-54f9fbefb7ec.png">
+
+- 更新该条数据后，create时间没有变化，开启auto_now的update时间变化了
+
+
+
+  
 
 
 
