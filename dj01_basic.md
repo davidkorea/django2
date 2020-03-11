@@ -90,7 +90,7 @@ django-env     django_project
 - 28 ALLOWED_HOSTS = []
 + 28 ALLOWED_HOSTS = ['192.168.0.4']
 ```
-- ```python manage.py runserver 0.0.0.0:7000```，监听所有ip访问7000端口
+- **[重要步骤]```python manage.py runserver 0.0.0.0:7000```，监听所有ip访问7000端口**，端口可以自行执行，但是`runserver 0.0.0.0`必须要做，否则局域网内ip访问不生效！！！
 - access http://192.168.0.4:7000/ 
 <p align="center">
     <img src="https://i.loli.net/2019/06/07/5cf9f8f1c70f232273.jpeg" alt="Sample"  width="200" height="420">
