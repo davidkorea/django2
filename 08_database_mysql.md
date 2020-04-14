@@ -7,7 +7,7 @@
 3. set mysql db in django
 4. install mysqlclient and pymysql, modify django source code -  [django2/3 mysqlclient pymysql "Error loading MySQLdb module. Did you install mysqlclient?" #5](https://github.com/davidkorea/django2/issues/5#issue-573657976)
 
-5. 
+5. <img width="700" src="https://user-images.githubusercontent.com/26485327/79173732-07eeb780-7e2b-11ea-82af-8b609369f7e6.png">
 
 # 1. 设置mysql作为数据库
 
